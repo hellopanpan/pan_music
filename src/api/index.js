@@ -6,3 +6,9 @@ export const getSongUr = (params) => {
     url: '/banner'
   })
 }
+export const getPersonal = (params) => {
+  return fetch({
+    method: 'get',
+    url: '/personalized'
+  })
+}

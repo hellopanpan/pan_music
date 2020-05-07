@@ -51,18 +51,51 @@ export const NavTabItem = styled.div`
     border-bottom: 2px solid #fff;
   }
 `;
+export const Recomand = styled.div`
+  width:100%;
+  background: green;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;  
+  align-items: flex-start;
+  padding: 20px 15px;
+  .item{
+    width: 30%;
+    position: relative;
+    margin: 10px 0;
+    .heder{
+      position: absolute;
+      top: 0;
+      right: 0;
+      text-align: right;
+      font-size: 0.2rem;
+      padding-right: 10px;
+    }
+    img{
+      width: 100%;
+      height: 3rem;
+    }
+    .dis{
+      font-size: 0.2rem;
+      padding-left: 10px
+    }
+  }
+  
+`;
 export const SlideIn = styled.div`
-  height: 160px;
+  height: 4rem;  
   width: 100%;
   background: #999;
   .img-pic{
     width: 100%;
-    height: 160px;
+    height: 4rem;
   }
   .ant-carousel .slick-slide {
     text-align: center;
-    height: 160px;
-    line-height: 160px;
+    height: 4rem;
     background: #364d79;
     overflow: hidden;
   }
