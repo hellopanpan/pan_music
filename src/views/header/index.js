@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
-import { getSongUrl } from '@/utils'
 
 import { Carousel } from 'antd';
 // 图标
@@ -35,7 +34,7 @@ function Header (props){
     checkArr: [{name: '推荐'},{name: '歌手'},{name: '排行榜'}]
   });
   const [check, setCheck] = useState(0);
-  const audioRef = useRef();
+  
   const changeTab = (index) => {
     console.log(index);
     setCheck(index)
@@ -47,9 +46,6 @@ function Header (props){
     return parseInt(num / 10000) + '万'
   }
   useEffect(() => {
-    audioRef.current.src = getSongUrl(1400256289)
-    audioRef.current.autoplay = true
-    audioRef.current.loop = true
     getBaner();
     getPersonal();
   }, [])
@@ -98,10 +94,7 @@ function Header (props){
       >
         <HeaderSearch onFocus={setFocusFn.bind(this, true)} onBlur={setFocusFn.bind(this, false)} className="search"></HeaderSearch>
       </CSSTransition>
-      <audio 
-        controls="controls"
-        ref={audioRef}
-      ></audio>
+      
     </HeaderWraper>
   ); 
 };

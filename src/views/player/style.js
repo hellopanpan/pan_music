@@ -13,7 +13,6 @@ export const PlayListItem = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  cursor: pointer;
   .num{
     width: 60px;
     text-align: center;

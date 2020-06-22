@@ -1,32 +1,51 @@
-import React, { useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
-import { actionsCreators } from './store'
+import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
+import Player from '@/views/player'
 // import { getSongUrl } from '@/utils'
 
 // import { Carousel } from 'antd';
 // 图标
-import {
-
-} from '@ant-design/icons';
+import { getPlaylistDetail } from '@/api'
 import { 
-
+  PlayList,
+  PlayListItem
 } from './style';
 
 function Header (props){
   console.log(props)
 
-  // const [state] = useState({
-  //   text: "",
-  //   checked: true,
-  //   checkArr: [{name: '推荐'},{name: '歌手'},{name: '排行榜'}]
-  // });
+  let { openMusic } = props
+  const [songList, setSongList] = useState([]);
 
   useEffect(() => {
+    getPlaylistDetail({id: '5066165290'}).then(res => {
+      setSongList((res.playlist && res.playlist.tracks) || [])
+    })
   }, [])
   return (
-    <CSSTransition>
-      <div>212</div>
+    <CSSTransition timeout={1000}>
+      <div>212
+
+        <PlayList>
+          {
+            songList.map( (item, index) => {
+              return (
+                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item.id)}}>
+                  <div className="num">{index + 1}</div>
+                  <div className="right">
+                    <div className="title">{item.name}</div>
+                    <div className="discribe">{item.ar && item.ar[0].name} {item.al && item.al.name}</div>
+                  </div>
+                </PlayListItem>
+              )
+            })
+          }
+          
+        </PlayList>
+        <Player></Player>
+      </div>
     </CSSTransition>
     
   ); 
@@ -41,19 +60,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFocusFn(flag) {
-      console.log(flag)
-      const action = actionsCreators.getList(flag)
+    openMusic(id) {
+      const action = actionsCreatorsPlayer.getSrc(id)
       dispatch(action)
     },
-    getBaner() {
-      const action = actionsCreators.getBaner()
-      dispatch(action)
-    },
-    getPersonal() {
-      const action = actionsCreators.getPersonal()
-      dispatch(action)
-    }
   };
 };
 

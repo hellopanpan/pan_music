@@ -6,6 +6,7 @@ export const getSongUr = (params) => {
     url: '/banner'
   })
 }
+
 export const getPersonal = (params) => {
   return fetch({
     method: 'get',
@@ -20,3 +21,7 @@ export const getPlaylistDetail = (params) => {
     params
   })
 }
+// 歌曲链接
+export const getSongUrlSrc = id => {
+  return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+};

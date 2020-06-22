@@ -7,7 +7,7 @@ const routes = [
     exact:true
   },
   {
-    path:'/detail2',
+    path:'/detail',
     component: Detail,
     exact:true
   }
