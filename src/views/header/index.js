@@ -63,12 +63,11 @@ function Header (props){
       <NavTab>
         {
           state.checkArr.map((item, index) => {
-          return <NavTabItem onClick={changeTab.bind(this, index)} className={check === index ? 'active': ''} >{item.name}</NavTabItem>
+          return <NavTabItem key={index} onClick={changeTab.bind(this, index)} className={check === index ? 'active': ''} >{item.name}</NavTabItem>
           })
         }
       </NavTab>
       <SlideIn>
-        
         <Carousel afterChange={onChange} autoplay>
           {banner.map(item => {
             return <div key={item.targetId}><img src={item.imageUrl}  className="img-pic" alt=""/></div>
@@ -79,7 +78,7 @@ function Header (props){
       <Recomand>
         {personal.map((item, index) => {
           return (
-            <div className="item">
+            <div className="item" key={index}>
               <div className="heder">
                 <CustomerServiceOutlined />
                 <span className="con">{getW(item.playCount)}</span>

@@ -1,10 +1,14 @@
 import React from 'react';
-import Header from '@/views/header/index'
+import { BrowserRouter} from "react-router-dom";
+import { renderRoutes } from "react-router-config";
+import {routes} from './router/index'
 import './index.css'
 function App() {
   return (
     <div className="App">
-      <Header></Header>
+      <BrowserRouter>
+        {renderRoutes(routes)}
+      </BrowserRouter>
     </div>
   );
 }

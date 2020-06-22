@@ -12,3 +12,11 @@ export const getPersonal = (params) => {
     url: '/personalized'
   })
 }
+// 获取详情
+export const getPlaylistDetail = (params) => {
+  return fetch({
+    method: 'get',
+    url: '/playlist/detail',
+    params
+  })
+}
