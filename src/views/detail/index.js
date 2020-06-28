@@ -20,19 +20,19 @@ function Header (props){
   const [songList, setSongList] = useState([]);
 
   useEffect(() => {
-    getPlaylistDetail({id: '5066165290'}).then(res => {
+    getPlaylistDetail({id: (props.history.location.state && props.history.location.state.id) || '5007828838'}).then(res => {
       setSongList((res.playlist && res.playlist.tracks) || [])
     })
-  }, [])
+  },[props.history.location.state])
   return (
     <CSSTransition timeout={1000}>
-      <div>212
+      <div>
 
         <PlayList>
           {
             songList.map( (item, index) => {
               return (
-                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item.id)}}>
+                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item)}}>
                   <div className="num">{index + 1}</div>
                   <div className="right">
                     <div className="title">{item.name}</div>
@@ -60,9 +60,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openMusic(id) {
-      const action = actionsCreatorsPlayer.getSrc(id)
+    openMusic(item) {
+      const action = actionsCreatorsPlayer.getSrc(item.id)
+      const action2 = actionsCreatorsPlayer.setCurrentPlayer({
+        title: item.name,
+        singer: item.ar && item.ar[0].name,
+        alname: item.al && item.al.name,
+        pic: item.al && item.al.picUrl,
+        id: item.id
+      })
       dispatch(action)
+      dispatch(action2)
     },
   };
 };

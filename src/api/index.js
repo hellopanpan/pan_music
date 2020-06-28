@@ -25,3 +25,11 @@ export const getPlaylistDetail = (params) => {
 export const getSongUrlSrc = id => {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
 };
+// 歌词链接
+export const getSongLrc = params => {
+  return fetch({
+    method: 'get',
+    url: '/lyric',
+    params
+  })
+};

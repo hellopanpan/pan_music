@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
-import { getSongUrl } from '@/utils'
 
 import { Slider } from 'antd';
 // 图标
@@ -10,21 +9,20 @@ import {
   PlayCircleFilled,
   PauseCircleFilled
 } from '@ant-design/icons';
-import { getPlaylistDetail } from '@/api'
 import { 
-  PlayListItem
+  IPlayer,
+  Nplayer
 } from './style';
-
+import Lrc from './lrc'
 function Player (props){
-  let { play, volume, src } = props;
-  let { setpause, setplay, setVolume } = props;
-
+  let { play, volume, src, player2 } = props;
+  let { setplay, setCurrenttimestate } = props;
   console.log(props)
+
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const audioRef = useRef();
   useEffect(() => {
-    audioRef.current.src = getSongUrl(1400256289)
     audioRef.current.autoplay = true
     audioRef.current.loop = true 
   }, []);
@@ -42,32 +40,63 @@ function Player (props){
     audioRef.current.volume = volume / 100
   }, [volume]);
   let icon = (
-    play ? <div onClick={() => {setplay(false)}}><PauseCircleFilled /></div> : <div onClick={() => {setplay(true)}}><PlayCircleFilled /></div>
+    play ? <div className="ico" onClick={() => {setplay(false)}}><PauseCircleFilled /></div> 
+      : <div  className="ico" onClick={() => {setplay(true)}}><PlayCircleFilled /></div>
   )
   // 时间播放新位置
   let updateTime = () => {
     setDuration(audioRef.current.duration)
     setCurrentTime(audioRef.current.currentTime)
+    setCurrenttimestate(audioRef.current.currentTime)
   }
   let setDurationsit = (value) => {
     audioRef.current.currentTime = value / 100 * duration
   }
+  const getSecondMin = (sec) => {
+    let min = parseInt(sec) / 60 > 0 ? parseInt(parseInt(sec) / 60) : '0'
+    let sec2= parseInt(parseInt(sec) % 60)
+    return `${min >= 10 ? min : '0' + min}: ${sec2 >= 10 ? sec2 : '0' + sec2}`
+  }
+  // mini palyer
+  let mini = (
+    <IPlayer>
+      <audio 
+        className="audio"
+        controls="controls"
+        onTimeUpdate={updateTime}
+        ref={audioRef}
+      ></audio>
+      <img src={player2.pic} className="pic" alt=""/>
+      <div className="title-wrap">
+        <div className="name">{player2.title}</div>
+        <div className="singer">{player2.singer}</div>
+      </div>
+      
+    </IPlayer>
+  )
+  let normal = (
+    <Nplayer>
+      <audio 
+        className="audio"
+        controls="controls"
+        onTimeUpdate={updateTime}
+        ref={audioRef}
+      ></audio>
+      <div className="lrc-cont"><Lrc></Lrc></div>
+      
+      <div className="progress">
+        <div className="cur">{getSecondMin(currentTime)}</div>
+        <div className="pro-bar"><Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit.call(this, value)}}/> </div>
+        <div className="total">{getSecondMin(duration)}</div>
+      </div>
+      <div className="button">
+        {icon}
+      </div>
+    </Nplayer>
+  )
   return (
     <CSSTransition timeout={1000}>
-      <div>
-        <audio 
-          controls="controls"
-          onTimeUpdate={updateTime}
-          ref={audioRef}
-        ></audio>
-        {volume}
-        <Slider defaultValue={volume} onChange={(value)=> {setVolume.call(this,value)}}/> 
-        <Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit.call(this, value)}}/> 
-        {duration} ---
-        {currentTime}
-        {icon}
-        {src}
-      </div>
+        {normal}
     </CSSTransition>
   ); 
 };
@@ -76,6 +105,8 @@ const mapStateToProps = (state) => {
     play: state.getIn(['player', 'play']),
     volume: state.getIn(['player', 'volume']),
     src: state.getIn(['player', 'src']),
+    current: state.getIn(['player', 'current']),
+    player2: state.getIn(['player', 'playerinfo']),
   };
 };
 
@@ -87,6 +118,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     setVolume(num) {
       const action = actionsCreators.setVolume(num)
+      dispatch(action)
+    },
+    setCurrenttimestate(time) {
+      const action = actionsCreators.setCurrenttime(time)
       dispatch(action)
     }
   };

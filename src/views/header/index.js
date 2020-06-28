@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
@@ -28,7 +28,7 @@ function Header (props){
   let { setFocusFn } = props;
   let { getBaner } = props;
   let { getPersonal } = props;
-  const [state, setState] = useState({
+  const [state] = useState({
     text: "",
     checked: true,
     checkArr: [{name: '推荐'},{name: '歌手'},{name: '排行榜'}]
@@ -44,6 +44,14 @@ function Header (props){
   }
   const getW = (num) => {
     return parseInt(num / 10000) + '万'
+  }
+  const goDetail = (id) => {
+    props.history.push({
+      pathname : '/detail',
+      state :{
+        id
+      }
+    });
   }
   useEffect(() => {
     getBaner();
@@ -74,7 +82,7 @@ function Header (props){
       <Recomand>
         {personal.map((item, index) => {
           return (
-            <div className="item" key={index}>
+            <div className="item" key={index} onClick={() => {goDetail(item.id)}}>
               <div className="heder">
                 <CustomerServiceOutlined />
                 <span className="con">{getW(item.playCount)}</span>
