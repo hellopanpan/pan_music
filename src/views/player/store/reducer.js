@@ -10,7 +10,6 @@ const defaultState = fromJS({
   playerinfo: {},
   playList: []
 })
-
 export default (state = defaultState, action) => {
   if (action.type === SET_PLAY ) {
     return state.set('play', action.value)
@@ -31,7 +30,16 @@ export default (state = defaultState, action) => {
     return state.set('playerinfo', action.value)
   }
   if (action.type === SET_LIST) {
-    return state.set('playList', action.value)
+    let playList2 = state.get('playList')
+    let flagPush = -1
+    playList2.forEach((item, index) => {
+      if (item.id === action.value.id) {
+        flagPush = index
+      }
+    })
+    if (flagPush > -1) playList2 = playList2.splice(flagPush, 1)
+    playList2 = playList2.unshift(action.value)
+    return state.set('playList', playList2)
   }
   return state;
 }

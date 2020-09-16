@@ -1,4 +1,7 @@
 body{
-  background: #859 !important;
+  background: #efefef !important;
   width: 750px !important;
+  height: 100vh;
+  overflow: scroll;
+  position: relative;
 }

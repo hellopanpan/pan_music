@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
-import Player from '@/views/player'
 // import { getSongUrl } from '@/utils'
 
 // import { Carousel } from 'antd';
@@ -44,7 +43,6 @@ function Header (props){
           }
           
         </PlayList>
-        <Player></Player>
       </div>
     </CSSTransition>
     
@@ -61,16 +59,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     openMusic(item) {
-      const action = actionsCreatorsPlayer.getSrc(item.id)
-      const action2 = actionsCreatorsPlayer.setCurrentPlayer({
+      let info = {
         title: item.name,
         singer: item.ar && item.ar[0].name,
         alname: item.al && item.al.name,
         pic: item.al && item.al.picUrl,
         id: item.id
-      })
+      }
+      const action = actionsCreatorsPlayer.getSrc(item.id)
+      const action2 = actionsCreatorsPlayer.setCurrentPlayer(info)
+      const action3 = actionsCreatorsPlayer.setPlaylist(info)
       dispatch(action)
       dispatch(action2)
+      dispatch(action3)
     },
   };
 };

@@ -7,20 +7,24 @@ import { Slider } from 'antd';
 // 图标
 import {
   PlayCircleFilled,
-  PauseCircleFilled
+  PauseCircleFilled,
+  AlignRightOutlined,
+  DeleteFilled
 } from '@ant-design/icons';
 import { 
   IPlayer,
-  Nplayer
+  Nplayer,
+  PlayListI
 } from './style';
 import Lrc from './lrc'
 function Player (props){
-  let { play, volume, src, player2 } = props;
-  let { setplay, setCurrenttimestate } = props;
+  let { play, volume, src, player2, playList } = props;
+  let { setplay, setCurrenttimestate, openMusic } = props;
   console.log(props)
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
+  const [showListflag, setShowListflag] = useState(false)
   const audioRef = useRef();
   useEffect(() => {
     audioRef.current.autoplay = true
@@ -52,6 +56,7 @@ function Player (props){
   let setDurationsit = (value) => {
     audioRef.current.currentTime = value / 100 * duration
   }
+  // 获取时分
   const getSecondMin = (sec) => {
     let min = parseInt(sec) / 60 > 0 ? parseInt(parseInt(sec) / 60) : '0'
     let sec2= parseInt(parseInt(sec) % 60)
@@ -71,11 +76,37 @@ function Player (props){
         <div className="name">{player2.title}</div>
         <div className="singer">{player2.singer}</div>
       </div>
-      
     </IPlayer>
   )
+  // 放歌
+  const goSong =  (e, item) => {
+    e.stopPropagation();
+    openMusic(item)
+  }
+  // 播放列表
+  let list = (
+    <PlayListI>
+      {playList.map(((item, index) => {
+        return (
+          <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
+            <div className="playcon">
+              <PlayCircleFilled />
+            </div>
+            <div className="name2">{item.title}</div>
+            <div className="icos">
+              <DeleteFilled />
+            </div>
+          </div>
+        )
+      }))}
+    </PlayListI>
+  )
+  const goList = (e, flag) => {
+    e.stopPropagation();
+    setShowListflag(flag)
+  }
   let normal = (
-    <Nplayer>
+    <Nplayer onClick={(e) => {goList(e, false)}}>
       <audio 
         className="audio"
         controls="controls"
@@ -91,7 +122,9 @@ function Player (props){
       </div>
       <div className="button">
         {icon}
+        <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
       </div>
+      {showListflag ? list : ''}
     </Nplayer>
   )
   return (
@@ -107,6 +140,7 @@ const mapStateToProps = (state) => {
     src: state.getIn(['player', 'src']),
     current: state.getIn(['player', 'current']),
     player2: state.getIn(['player', 'playerinfo']),
+    playList: state.getIn(['player', 'playList']),
   };
 };
 
@@ -123,7 +157,13 @@ const mapDispatchToProps = (dispatch) => {
     setCurrenttimestate(time) {
       const action = actionsCreators.setCurrenttime(time)
       dispatch(action)
-    }
+    },
+    openMusic(item) {
+      const action = actionsCreators.getSrc(item.id)
+      const action2 = actionsCreators.setCurrentPlayer(item)
+      dispatch(action)
+      dispatch(action2)
+    },
   };
 };
 

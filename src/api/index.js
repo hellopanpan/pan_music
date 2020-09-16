@@ -33,3 +33,19 @@ export const getSongLrc = params => {
     params
   })
 };
+// 搜索建议
+export const getSuggest = params => {
+  return fetch({
+    method: 'get',
+    url: '/search/suggest',
+    params
+  })
+};
+// 搜索建议
+export const getSearch = params => {
+  return fetch({
+    method: 'get',
+    url: '/search',
+    params
+  })
+};
