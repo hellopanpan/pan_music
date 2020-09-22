@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, memo, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
@@ -9,18 +9,19 @@ import {
   PlayCircleFilled,
   PauseCircleFilled,
   AlignRightOutlined,
-  DeleteFilled
+  DeleteFilled,
+  DownOutlined,
 } from '@ant-design/icons';
 import { 
+  AudioWrap,
   IPlayer,
   Nplayer,
   PlayListI
 } from './style';
 import Lrc from './lrc'
-function Player (props){
-  let { play, volume, src, player2, playList } = props;
-  let { setplay, setCurrenttimestate, openMusic } = props;
-  console.log(props)
+const Player = memo((props) => {
+  let { play, volume, src, player2, playList, showMini } = props;
+  let { setplay, setCurrenttimestate, openMusic, toggleMini } = props;
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -44,8 +45,8 @@ function Player (props){
     audioRef.current.volume = volume / 100
   }, [volume]);
   let icon = (
-    play ? <div className="ico" onClick={() => {setplay(false)}}><PauseCircleFilled /></div> 
-      : <div  className="ico" onClick={() => {setplay(true)}}><PlayCircleFilled /></div>
+    play ? <div className="ico" onClick={setplay}><PauseCircleFilled /></div> 
+      : <div  className="ico" onClick={setplay}><PlayCircleFilled /></div>
   )
   // 时间播放新位置
   let updateTime = () => {
@@ -62,22 +63,6 @@ function Player (props){
     let sec2= parseInt(parseInt(sec) % 60)
     return `${min >= 10 ? min : '0' + min}: ${sec2 >= 10 ? sec2 : '0' + sec2}`
   }
-  // mini palyer
-  let mini = (
-    <IPlayer>
-      <audio 
-        className="audio"
-        controls="controls"
-        onTimeUpdate={updateTime}
-        ref={audioRef}
-      ></audio>
-      <img src={player2.pic} className="pic" alt=""/>
-      <div className="title-wrap">
-        <div className="name">{player2.title}</div>
-        <div className="singer">{player2.singer}</div>
-      </div>
-    </IPlayer>
-  )
   // 放歌
   const goSong =  (e, item) => {
     e.stopPropagation();
@@ -85,54 +70,83 @@ function Player (props){
   }
   // 播放列表
   let list = (
-    <PlayListI>
-      {playList.map(((item, index) => {
-        return (
-          <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
-            <div className="playcon">
-              <PlayCircleFilled />
+    <PlayListI onClick={(e) => {goList(e, false)}}>
+      <div className="wrap">
+      {
+        playList.map(((item, index) => {
+          return (
+            <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
+              <div className="playcon">
+                {player2.id === item.id ? <PlayCircleFilled /> : null}
+              </div>
+              <div className="name2">{item.title}</div>
+              <div className="icos">
+                <DeleteFilled />
+              </div>
             </div>
-            <div className="name2">{item.title}</div>
-            <div className="icos">
-              <DeleteFilled />
-            </div>
-          </div>
-        )
-      }))}
+          )
+        }))
+      }
+      </div>
     </PlayListI>
   )
   const goList = (e, flag) => {
     e.stopPropagation();
     setShowListflag(flag)
   }
+  // mini palyer
+  let mini = (
+    <IPlayer>
+      <img src={player2.pic} className="pic" alt="" onClick={toggleMini} />
+      <div className="title-wrap">
+        <div className="name">{player2.title}</div>
+        <div className="singer">{player2.singer}</div>
+      </div>
+       {icon}
+    </IPlayer>
+  )
+  //  大号音乐播放
   let normal = (
-    <Nplayer onClick={(e) => {goList(e, false)}}>
+    <Nplayer >
+      <div className="top">
+        <DownOutlined onClick={toggleMini}/>
+        <div className="right">
+          <div className="title">{player2.title}</div>
+          <div className="singer">{player2.singer}</div>
+        </div>
+      </div>
+      <div className="wraper">
+        <div className="lrc-cont"><Lrc></Lrc></div>
+        <div className="progress">
+          <div className="cur">{getSecondMin(currentTime)}</div>
+          <div className="pro-bar"><Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit.call(this, value)}}/> </div>
+          <div className="total">{getSecondMin(duration)}</div>
+        </div>
+        <div className="button">
+          {icon}
+          <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
+        </div>
+      </div>
+      
+    </Nplayer>
+  )
+  
+  return (
+    <AudioWrap>
       <audio 
         className="audio"
         controls="controls"
         onTimeUpdate={updateTime}
         ref={audioRef}
       ></audio>
-      <div className="lrc-cont"><Lrc></Lrc></div>
-      
-      <div className="progress">
-        <div className="cur">{getSecondMin(currentTime)}</div>
-        <div className="pro-bar"><Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit.call(this, value)}}/> </div>
-        <div className="total">{getSecondMin(duration)}</div>
-      </div>
-      <div className="button">
-        {icon}
-        <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
-      </div>
-      {showListflag ? list : ''}
-    </Nplayer>
-  )
-  return (
-    <CSSTransition timeout={1000}>
-        {normal}
-    </CSSTransition>
+      <CSSTransition timeout={1000}>
+        {showMini? mini: normal}
+      </CSSTransition>
+      {showListflag ? list : null}
+    </AudioWrap>
+    
   ); 
-};
+});
 const mapStateToProps = (state) => {
   return {
     play: state.getIn(['player', 'play']),
@@ -141,6 +155,7 @@ const mapStateToProps = (state) => {
     current: state.getIn(['player', 'current']),
     player2: state.getIn(['player', 'playerinfo']),
     playList: state.getIn(['player', 'playList']),
+    showMini: state.getIn(['player', 'showMini']),
   };
 };
 
@@ -164,6 +179,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(action)
       dispatch(action2)
     },
+    toggleMini() {
+      const action = actionsCreators.toggleMini()
+      dispatch(action)
+    }
   };
 };
 

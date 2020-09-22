@@ -21,7 +21,6 @@ import {
 } from './style';
 
 function Header (props){
-  console.log(props)
   let { focused }  = props;
   let { banner }  = props;
   let { personal }  = props;
@@ -56,7 +55,7 @@ function Header (props){
   useEffect(() => {
     getBaner();
     getPersonal();
-  }, [])
+  }, [getBaner, getPersonal])
   return (
     <HeaderWraper>
       <Nav>

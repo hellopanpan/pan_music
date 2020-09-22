@@ -10,7 +10,6 @@ import {
 } from './style';
 
 function Header (props){
-  console.log(props)
   let { focused }  = props;
   let { setFocusFn } = props;
  

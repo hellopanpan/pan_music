@@ -13,7 +13,6 @@ import {
 } from './style';
 
 function Header (props){
-  console.log(props)
 
   let { openMusic } = props
   const [songList, setSongList] = useState([]);

@@ -1,14 +1,19 @@
 import styled from 'styled-components'
-
+export const AudioWrap = styled.div`
+  audio{
+    display: none
+  }
+`
 export const IPlayer = styled.div`
   height: 90px;
   width: 100%;
   background:green;
   display: flex;
   flex-direction: row;
-  .audio{
-    display:none;
-  }
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
   .pic{
     height: 60px;
     width: 60px;
@@ -30,16 +35,37 @@ export const IPlayer = styled.div`
   }
 `;
 export const Nplayer = styled.div`
-  width: 100%;
-  position: absolute;
-  z-index: 100000;
-  background: #666;
-  top: 100px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem;
-  box-sizing: border-box;
+  height: 100vh;
+  background: green;
+  .top{
+    height: 100px;
+    padding: 10px 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .anticon{
+      font-size: 40px;
+      color: #fff;
+    }
+    .right{
+      margin-left: 20px;
+      font-size: 20px;
+      color: #fff;
+    }
+  }
+  .wraper{
+    width: 100%;
+    position: absolute;
+    z-index: 100000;
+    background: #666;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
   .audio{
     display:none;
   }
@@ -74,21 +100,29 @@ export const Nplayer = styled.div`
 
 
 export const PlayListI = styled.div`
-  position: absolute;
+    position: absolute;
     bottom: 0;
     left: 0;
-    height: 600px;
+    height: 100vh;
     width: 100%;
-    background:rgba(0,0, 0, 0.6);
+    background:rgba(0,0, 0, 0.4);
     color: #fff;
     z-index:100001;
-    padding-top: 1rem;
+    .wrap{
+      height: 600px;
+      width: 100%;
+      background:rgba(0,0, 0, 0.6);
+      position: absolute;
+      bottom: 0;
+    }
+    
     .itemL{
       display: flex;
       flex-direction: row;
       align-items: center;
       padding: 0.15rem 0.5rem;
       font-size: 0.4rem;
+      cursor: pointer;
     }
     .playcon{
       width: 1rem;

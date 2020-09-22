@@ -5,12 +5,12 @@ import {
   SET_LRC,
   SET_CURRENT,
   SET_PLAYER,
-  SET_LIST
+  SET_LIST,
+  TOGGlE_MINI
  } from './actionType'
 import * as api from '@/api'
-export const setPlay = (flag) => ({
-  type: SET_PLAY,
-  value: flag
+export const setPlay = () => ({
+  type: SET_PLAY
 });
 export const setVolume = (num) => ({
   type: SET_VOLUME,
@@ -35,6 +35,9 @@ export const setCurrentPlayer = (player) => ({
 export const setPlaylist = (list) => ({
   type: SET_LIST,
   value: list
+});
+export const toggleMini = () => ({
+  type: TOGGlE_MINI
 });
 export const getSrc = (id) => {
   return (dispatch) => {

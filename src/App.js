@@ -7,9 +7,11 @@ import './index.css'
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        {renderRoutes(routes)}
-      </BrowserRouter>
+      <div className="app-wrap">
+        <BrowserRouter>
+          {renderRoutes(routes)}
+        </BrowserRouter>
+      </div>
       <Player></Player>
     </div>
   );

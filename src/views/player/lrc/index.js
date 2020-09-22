@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef, useCallback} from 'react';
 import { connect } from 'react-redux'
 import BScroll from 'better-scroll'
 import { actionsCreators } from '../store'
@@ -41,6 +41,13 @@ function LRC (props, ref){
       setYy(arr.lrc)
     }
   }, [lyric])
+
+  const goNext = useCallback((max) => {
+    if (currentLineNum < 5 || currentLineNum >= max) return;
+    if (!moving) return 
+    let lineEl = lyricLineRefs.current[currentLineNum-3].current;
+    usescollRef.current.scrollToElement(lineEl, 1000);
+  }, [currentLineNum, moving])
   // 跳转
   useEffect(() => {
     time.forEach((item, index) => {
@@ -52,13 +59,8 @@ function LRC (props, ref){
         goNext()
       }
     })
-  }, [current])
-  const goNext = (max) => {
-    if (currentLineNum < 5 || currentLineNum >= max) return;
-    if (!moving) return 
-    let lineEl = lyricLineRefs.current[currentLineNum-3].current;
-    usescollRef.current.scrollToElement(lineEl, 1000);
-  }
+  }, [current,goNext, time])
+  
   useEffect(() => {
     if (!src) return;
     let id = src.match(/\d{6,20}/)[0]

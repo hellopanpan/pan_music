@@ -4,7 +4,6 @@ export const searchFoucs = (flag) => ({
   value: flag
 });
 export const getList = () => {
-  console.log(123)
   return () => {
 
   }
