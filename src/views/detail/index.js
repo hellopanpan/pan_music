@@ -28,7 +28,6 @@ function Header (props){
     <CSSTransition timeout={1000}>
       <div>
         <GoBack></GoBack>
-        <Scrollbars>
           <PlayList>
             {
               songList.map( (item, index) => {
@@ -45,8 +44,6 @@ function Header (props){
             }
             
           </PlayList>
-        </Scrollbars>
-        
       </div>
     </CSSTransition>
     
