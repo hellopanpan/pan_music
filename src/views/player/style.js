@@ -33,6 +33,10 @@ export const IPlayer = styled.div`
   .ico{
     font-size: 40px;
   }
+  .anticon{
+    font-size: 40px;
+    margin-left: 10px;
+  }
 `;
 export const Nplayer = styled.div`
   height: 100vh;
@@ -94,6 +98,7 @@ export const Nplayer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     font-size: 40px; 
   }
 `

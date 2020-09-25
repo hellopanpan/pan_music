@@ -11,6 +11,10 @@ import {
   AlignRightOutlined,
   DeleteFilled,
   DownOutlined,
+  VerticalLeftOutlined,
+  VerticalRightOutlined,
+  SyncOutlined,
+  LoginOutlined
 } from '@ant-design/icons';
 import { 
   AudioWrap,
@@ -20,29 +24,33 @@ import {
 } from './style';
 import Lrc from './lrc'
 const Player = memo((props) => {
-  let { play, volume, src, player2, playList, showMini } = props;
-  let { setplay, setCurrenttimestate, openMusic, toggleMini } = props;
+  let { play, volume, src, player2, playList, showMini , circle} = props;
+  let { setplay, setCurrenttimestate, openMusic, toggleMini, goNext, removeSong , toggleCircle} = props;
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [showListflag, setShowListflag] = useState(false)
   const audioRef = useRef();
+  const playerRef = useRef();
   useEffect(() => {
-    audioRef.current.autoplay = true
-    audioRef.current.loop = true 
-  }, []);
-  
+    if (src) {
+      audioRef.current.src = src;
+      audioRef.current.autoplay = true;
+      audioRef.current.loop = true 
+      if (!play) setplay()
+    }
+  }, [src]);
   // 播放暂停？
   useEffect(() => {
-    if (play) audioRef.current.play();
-    if (!play) audioRef.current.pause();
+    if (audioRef.current) {
+      if (play) audioRef.current.play();
+      if (!play) audioRef.current.pause();
+    }    
+    playerRef.current = true
   }, [play]);
-  useEffect(() => {
-    if (src) audioRef.current.src = src;
-  }, [src]);
   // 声音
   useEffect(() => {
-    audioRef.current.volume = volume / 100
+    if (audioRef.current) audioRef.current.volume = volume / 100
   }, [volume]);
   let icon = (
     play ? <div className="ico" onClick={setplay}><PauseCircleFilled /></div> 
@@ -53,6 +61,8 @@ const Player = memo((props) => {
     setDuration(audioRef.current.duration)
     setCurrentTime(audioRef.current.currentTime)
     setCurrenttimestate(audioRef.current.currentTime)
+    // 播放下一曲
+    if ((audioRef.current.duration - audioRef.current.currentTime <= 1) && !circle) goNext(player2.id, playList, true) 
   }
   let setDurationsit = (value) => {
     audioRef.current.currentTime = value / 100 * duration
@@ -68,25 +78,32 @@ const Player = memo((props) => {
     e.stopPropagation();
     openMusic(item)
   }
+  // 清除 放歌
+  const  goremoveSong =  (e, item, player2, playList) => {
+    e.stopPropagation();
+    removeSong(item, player2, playList)
+  }
   // 播放列表
   let list = (
     <PlayListI onClick={(e) => {goList(e, false)}}>
-      <div className="wrap">
-      {
-        playList.map(((item, index) => {
-          return (
-            <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
-              <div className="playcon">
-                {player2.id === item.id ? <PlayCircleFilled /> : null}
-              </div>
-              <div className="name2">{item.title}</div>
-              <div className="icos">
-                <DeleteFilled />
-              </div>
-            </div>
-          )
-        }))
-      }
+      <div className="wrap" >
+        <div onClick={(e) => {e.stopPropagation()}}>
+          {
+            playList.map(((item, index) => {
+              return (
+                <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
+                  <div className="playcon">
+                    {player2.id === item.id ? <PlayCircleFilled /> : null}
+                  </div>
+                  <div className="name2">{item.title}</div>
+                  <div className="icos">
+                    <DeleteFilled onClick={(e) => {goremoveSong(e, item, player2, playList)}}/>
+                  </div>
+                </div>
+              )
+            }))
+          }
+        </div>
       </div>
     </PlayListI>
   )
@@ -102,7 +119,8 @@ const Player = memo((props) => {
         <div className="name">{player2.title}</div>
         <div className="singer">{player2.singer}</div>
       </div>
-       {icon}
+      {icon}
+      <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
     </IPlayer>
   )
   //  大号音乐播放
@@ -119,19 +137,24 @@ const Player = memo((props) => {
         <div className="lrc-cont"><Lrc></Lrc></div>
         <div className="progress">
           <div className="cur">{getSecondMin(currentTime)}</div>
-          <div className="pro-bar"><Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit.call(this, value)}}/> </div>
+          <div className="pro-bar"><Slider  value={currentTime / duration * 100} onChange={(value)=> {setDurationsit(value)}}/> </div>
           <div className="total">{getSecondMin(duration)}</div>
         </div>
         <div className="button">
+          {
+            circle ? <LoginOutlined onClick={toggleCircle}/> : <SyncOutlined onClick={toggleCircle}/>
+          }
+          
+          
+          <VerticalRightOutlined onClick={() => goNext(player2.id, playList, false) } />
           {icon}
-          <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
+          <VerticalLeftOutlined onClick={() => goNext(player2.id, playList, true) } />
         </div>
       </div>
       
     </Nplayer>
   )
-  
-  return (
+  let playerRender = (
     <AudioWrap>
       <audio 
         className="audio"
@@ -144,8 +167,8 @@ const Player = memo((props) => {
       </CSSTransition>
       {showListflag ? list : null}
     </AudioWrap>
-    
-  ); 
+  )
+  return playerRef.current ? playerRender : null
 });
 const mapStateToProps = (state) => {
   return {
@@ -156,6 +179,7 @@ const mapStateToProps = (state) => {
     player2: state.getIn(['player', 'playerinfo']),
     playList: state.getIn(['player', 'playList']),
     showMini: state.getIn(['player', 'showMini']),
+    circle: state.getIn(['player', 'circle']),
   };
 };
 
@@ -181,6 +205,23 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleMini() {
       const action = actionsCreators.toggleMini()
+      dispatch(action)
+    },
+    removeSong(item, player2, list) {
+
+      if ((item.id === player2.id) && list.length >= 2) {
+        const action = actionsCreators.goNext(item.id, list, true)
+        dispatch(action)
+      }
+      const action = actionsCreators.removeSong(item)
+      dispatch(action)
+    },
+    goNext(id, list, flag) {
+      const action = actionsCreators.goNext(id, list, flag)
+      dispatch(action)
+    },
+    toggleCircle() {
+      const action = actionsCreators.toggleCircle()
       dispatch(action)
     }
   };

@@ -24,7 +24,6 @@ function Header (props){
       >
         <HeaderSearch onFocus={setFocusFn.bind(this, true)} onBlur={setFocusFn.bind(this, false)} className="search"></HeaderSearch>
       </CSSTransition>
-      
     </HeaderWraper>
   ); 
 };

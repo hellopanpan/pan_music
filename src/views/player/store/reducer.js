@@ -1,8 +1,8 @@
-import { SET_PLAY, SET_SRC, SET_VOLUME, SET_LRC, SET_CURRENT, SET_PLAYER, SET_LIST, TOGGlE_MINI } from './actionType'
+import { SET_PLAY, SET_SRC, SET_VOLUME, SET_LRC, SET_CURRENT, SET_PLAYER, SET_LIST, TOGGlE_MINI, SET_REMOVE, TOGGLE_CIRCLE } from './actionType'
 // immutable 库
 import { fromJS } from 'immutable'
 const defaultState = fromJS({
-  play: true,
+  play: false,
   volume: 100, 
   src: '',
   lrc: '',
@@ -10,6 +10,8 @@ const defaultState = fromJS({
   playerinfo: {},
   playList: [],
   showMini: true,
+  openPlayer: false,
+  circle: false
 })
 export default (state = defaultState, action) => {
   if (action.type === SET_PLAY ) {
@@ -34,16 +36,20 @@ export default (state = defaultState, action) => {
     return state.set('showMini', !state.get('showMini'))
   }
   if (action.type === SET_LIST) {
-    let playList2 = state.get('playList')
-    let flagPush = -1
-    playList2.forEach((item, index) => {
-      if (item.id === action.value.id) {
-        flagPush = index
+    return state.set('playList', action.value)
+  }
+  if (action.type === TOGGLE_CIRCLE) {
+    return state.set('circle', !state.get('circle'))
+  }
+  if (action.type === SET_REMOVE) {
+    const list = state.get('playList')
+    let arr = []
+    list.forEach(item => {
+      if (action.value.id !== item.id) {
+        arr.push(item)
       }
     })
-    if (flagPush > -1) playList2 = playList2.splice(flagPush, 1)
-    playList2 = playList2.unshift(action.value)
-    return state.set('playList', playList2)
+    return state.set('playList', arr)
   }
   return state;
 }

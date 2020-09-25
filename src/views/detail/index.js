@@ -11,7 +11,7 @@ import {
   PlayList,
   PlayListItem
 } from './style';
-
+import GoBack from '@/common/goBack/index'
 function Header (props){
 
   let { openMusic } = props
@@ -25,12 +25,12 @@ function Header (props){
   return (
     <CSSTransition timeout={1000}>
       <div>
-
+        <GoBack></GoBack>
         <PlayList>
           {
             songList.map( (item, index) => {
               return (
-                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item)}}>
+                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item, songList)}}>
                   <div className="num">{index + 1}</div>
                   <div className="right">
                     <div className="title">{item.name}</div>
@@ -57,7 +57,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openMusic(item) {
+    openMusic(item, songList) {
       let info = {
         title: item.name,
         singer: item.ar && item.ar[0].name,
@@ -65,9 +65,18 @@ const mapDispatchToProps = (dispatch) => {
         pic: item.al && item.al.picUrl,
         id: item.id
       }
+      let list = songList.map(item => {
+        return {
+          title: item.name,
+          singer: item.ar && item.ar[0].name,
+          alname: item.al && item.al.name,
+          pic: item.al && item.al.picUrl,
+          id: item.id
+        }
+      })
       const action = actionsCreatorsPlayer.getSrc(item.id)
       const action2 = actionsCreatorsPlayer.setCurrentPlayer(info)
-      const action3 = actionsCreatorsPlayer.setPlaylist(info)
+      const action3 = actionsCreatorsPlayer.setPlaylist(list)
       dispatch(action)
       dispatch(action2)
       dispatch(action3)

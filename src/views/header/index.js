@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { CSSTransition } from 'react-transition-group'
+// import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
 
@@ -15,18 +15,12 @@ import {
   Nav,
   NavTab,
   NavTabItem,
-  HeaderSearch,
   SlideIn,
   Recomand
 } from './style';
 
 function Header (props){
-  let { focused }  = props;
-  let { banner }  = props;
-  let { personal }  = props;
-  let { setFocusFn } = props;
-  let { getBaner } = props;
-  let { getPersonal } = props;
+  let { banner, personal, getBaner, getPersonal}  = props;
   const [state] = useState({
     text: "",
     checked: true,
@@ -93,21 +87,12 @@ function Header (props){
             </div>
           )
         })}
-      </Recomand>
-      <CSSTransition
-        in={focused}
-        timeout={1000}
-        classNames="fade"
-      >
-        <HeaderSearch onFocus={setFocusFn.bind(this, true)} onBlur={setFocusFn.bind(this, false)} className="search"></HeaderSearch>
-      </CSSTransition>
-      
+      </Recomand> 
     </HeaderWraper>
   ); 
 };
 const mapStateToProps = (state) => {
   return {
-    focused: state.getIn(['header', 'focused']),
     banner: state.getIn(['header', 'banner']),
     personal: state.getIn(['header', 'personal'])
   };
@@ -115,11 +100,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setFocusFn(flag) {
-      console.log(flag)
-      const action = actionsCreators.getList(flag)
-      dispatch(action)
-    },
     getBaner() {
       const action = actionsCreators.getBaner()
       dispatch(action)

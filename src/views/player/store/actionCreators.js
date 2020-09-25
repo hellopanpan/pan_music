@@ -6,7 +6,9 @@ import {
   SET_CURRENT,
   SET_PLAYER,
   SET_LIST,
-  TOGGlE_MINI
+  TOGGlE_MINI,
+  SET_REMOVE,
+  TOGGLE_CIRCLE
  } from './actionType'
 import * as api from '@/api'
 export const setPlay = () => ({
@@ -32,13 +34,45 @@ export const setCurrentPlayer = (player) => ({
   type: SET_PLAYER,
   value: player
 });
+// 设置 播放列表
 export const setPlaylist = (list) => ({
   type: SET_LIST,
   value: list
 });
+// 切换 大小播放器
 export const toggleMini = () => ({
   type: TOGGlE_MINI
 });
+//移除歌曲
+export const removeSong = (item) => ({
+  type: SET_REMOVE,
+  value: item
+});
+//移除歌曲
+export const toggleCircle = (item) => ({
+  type: TOGGLE_CIRCLE,
+});
+// 上下一曲
+export const goNext = (id, list, flag) => {
+  let player = {}
+  let index1 = 0
+  let list1 = JSON.parse(JSON.stringify(list))
+  list1.forEach((item, index) => {
+    if (item.id ===  id) {
+      if (flag) index1 = index + 1
+      if (!flag) index1 = index - 1
+    }
+  })
+  if (index1 === list.length) index1 = 0
+  if (index1 === -1) index1 = list.length - 1
+  
+  player = list1.splice(index1, 1)
+  return (dispatch) => {
+    dispatch(getSrc(player[0].id))
+    dispatch(setCurrentPlayer(player[0]))
+  }
+};
+// 获取歌曲src
 export const getSrc = (id) => {
   return (dispatch) => {
     // 异步操作
