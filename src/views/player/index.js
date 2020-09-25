@@ -115,7 +115,7 @@ const Player = memo((props) => {
   let mini = (
     <IPlayer>
       <img src={player2.pic} className="pic" alt="" onClick={toggleMini} />
-      <div className="title-wrap">
+      <div className="title-wrap" onClick={toggleMini}>
         <div className="name">{player2.title}</div>
         <div className="singer">{player2.singer}</div>
       </div>

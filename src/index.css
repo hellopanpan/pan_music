@@ -9,5 +9,4 @@ body, .App{
 }
 .app-wrap{
   flex: 1;
-  overflow: scroll;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
+import { Scrollbars } from 'react-custom-scrollbars';
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 // import { getSongUrl } from '@/utils'
 
@@ -12,6 +13,7 @@ import {
   PlayListItem
 } from './style';
 import GoBack from '@/common/goBack/index'
+
 function Header (props){
 
   let { openMusic } = props
@@ -26,22 +28,25 @@ function Header (props){
     <CSSTransition timeout={1000}>
       <div>
         <GoBack></GoBack>
-        <PlayList>
-          {
-            songList.map( (item, index) => {
-              return (
-                <PlayListItem key={index} onClick={()=> {openMusic.call(this, item, songList)}}>
-                  <div className="num">{index + 1}</div>
-                  <div className="right">
-                    <div className="title">{item.name}</div>
-                    <div className="discribe">{item.ar && item.ar[0].name} {item.al && item.al.name}</div>
-                  </div>
-                </PlayListItem>
-              )
-            })
-          }
-          
-        </PlayList>
+        <Scrollbars>
+          <PlayList>
+            {
+              songList.map( (item, index) => {
+                return (
+                  <PlayListItem key={index} onClick={()=> {openMusic.call(this, item, songList)}}>
+                    <div className="num">{index + 1}</div>
+                    <div className="right">
+                      <div className="title">{item.name}</div>
+                      <div className="discribe">{item.ar && item.ar[0].name} {item.al && item.al.name}</div>
+                    </div>
+                  </PlayListItem>
+                )
+              })
+            }
+            
+          </PlayList>
+        </Scrollbars>
+        
       </div>
     </CSSTransition>
     

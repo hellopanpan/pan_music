@@ -38,6 +38,11 @@ function Header (props){
   const getW = (num) => {
     return parseInt(num / 10000) + '万'
   }
+  const goSearch = () => {
+    props.history.push({
+      pathname : '/search'
+    });
+  }
   const goDetail = (id) => {
     props.history.push({
       pathname : '/detail',
@@ -55,7 +60,7 @@ function Header (props){
       <Nav>
         <AlignLeftOutlined />
         <span>音悦台</span>
-        <SearchOutlined onClick={getBaner}/>
+        <SearchOutlined onClick={goSearch}/>
       </Nav>
       <NavTab>
         {

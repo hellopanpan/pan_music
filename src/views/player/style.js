@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 export const AudioWrap = styled.div`
+  box-shadow: 0px -2px 5px #999;
   audio{
     display: none
   }
@@ -25,35 +26,45 @@ export const IPlayer = styled.div`
   .name{
     font-size: 16px;
     color: #333;
+    width: 175px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
   }
   .singer{
     font-size: 16px;
     color: #888;
   }
   .ico{
-    font-size: 40px;
+    font-size: 30px;
   }
   .anticon{
-    font-size: 40px;
+    font-size: 30px;
     margin-left: 10px;
   }
 `;
 export const Nplayer = styled.div`
   height: 100vh;
   background: green;
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index:100000;
   .top{
-    height: 100px;
+    height: 80px;
     padding: 10px 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
     .anticon{
-      font-size: 40px;
+      font-size: 30px;
       color: #fff;
     }
     .right{
-      margin-left: 20px;
-      font-size: 20px;
+      margin-left: 26px;
+      font-size: 0.3rem;
       color: #fff;
     }
   }
@@ -100,6 +111,7 @@ export const Nplayer = styled.div`
     align-items: center;
     justify-content: space-between;
     font-size: 40px; 
+    width: 90%;
   }
 `
 
@@ -110,13 +122,12 @@ export const PlayListI = styled.div`
     left: 0;
     height: 100vh;
     width: 100%;
-    background:rgba(0,0, 0, 0.4);
+    background:rgba(0,0, 0, 0.8);
     color: #fff;
     z-index:100001;
     .wrap{
       height: 600px;
       width: 100%;
-      background:rgba(0,0, 0, 0.6);
       position: absolute;
       bottom: 0;
     }

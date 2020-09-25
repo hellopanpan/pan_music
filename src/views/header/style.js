@@ -66,6 +66,10 @@ export const Recomand = styled.div`
     width: 30%;
     position: relative;
     margin: 10px 0;
+    .con{
+      margin-left: 5px;
+      font-size: 10px;
+    }
     .heder{
       position: absolute;
       top: 2px;

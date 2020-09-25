@@ -14,7 +14,7 @@ function LRC (props, ref){
   const usescollRef = useRef();
   const lyricLineRefs = useRef([]);
   const [yy, setYy] = useState([
-    12,32,32,23,1,23,23,2,3,23,23,122121,12,21,21,2121,2,21,1,2,21,12,
+    '歌词加载中..'
   ])
   const [moving, SetMoving] = useState(true)
   const [time, setTime] = useState([
@@ -26,7 +26,8 @@ function LRC (props, ref){
     usescollRef.current = new BScroll(wrapRef.current, {
       scrollY: true,
       click: false,
-      bounce: true
+      bounce: true,
+      mouseWheel: true
     });
     usescollRef.current.on('touchEnd', () => {
       console.log('flick-------')

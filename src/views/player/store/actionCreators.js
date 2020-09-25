@@ -8,7 +8,8 @@ import {
   SET_LIST,
   TOGGlE_MINI,
   SET_REMOVE,
-  TOGGLE_CIRCLE
+  TOGGLE_CIRCLE,
+  PUSH_LIST
  } from './actionType'
 import * as api from '@/api'
 export const setPlay = () => ({
@@ -38,6 +39,11 @@ export const setCurrentPlayer = (player) => ({
 export const setPlaylist = (list) => ({
   type: SET_LIST,
   value: list
+});
+// 添加 播放列表
+export const pushPlaylist = (song) => ({
+  type: PUSH_LIST,
+  value: song
 });
 // 切换 大小播放器
 export const toggleMini = () => ({
