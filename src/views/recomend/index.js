@@ -16,6 +16,7 @@ import {
 
 function Header (props){
   let { banner, personal, getBaner, getPersonal}  = props;
+  console.log('recomend --- ' + props)
   const onChange = (a, b, c) => {
     console.log(a, b, c);
   }

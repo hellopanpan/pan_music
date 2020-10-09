@@ -1,10 +1,10 @@
-import Recomend from '@/views/recomend/index'
+import Header from '@/views/header/index'
 import Detail from '@/views/detail/index'
 import Search from '@/views/search/index'
 const routes = [
   {
     path:'/',
-    component: Recomend,
+    component: Header,
     exact:true
   },
   {

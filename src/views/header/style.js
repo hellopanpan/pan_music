@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 import logoPic from '@/statics/images/logo512.png'
 
+export const Wrap = styled.div`
+  width: 100%;
+  height: 100%;
+  background: #777;
+`;
+
 export const HeaderWraper = styled.div`
-  height: auto;
   width: 100%;
   background: #777;
 `;

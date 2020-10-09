@@ -1,5 +1,4 @@
 import { fetch } from '@/utils/fetch'
-
 export const getSongUr = (params) => {
   return fetch({
     method: 'get',
@@ -46,6 +45,14 @@ export const getSearch = params => {
   return fetch({
     method: 'get',
     url: '/search',
+    params
+  })
+};
+// 获取歌手
+export const getArtists = params => {
+  return fetch({
+    method: 'get',
+    url: '/top/artists',
     params
   })
 };
