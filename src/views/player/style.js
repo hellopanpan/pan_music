@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 export const AudioWrap = styled.div`
-  box-shadow: 0px -2px 5px #999;
   audio{
     display: none
   }
 `
 export const IPlayer = styled.div`
-  height: 90px;
+  box-shadow: 0px -2px 5px #333;
+  position: absolute;
+  bottom: 0;
+  height: 100px;
   width: 100%;
   background:green;
   display: flex;
@@ -48,9 +50,9 @@ export const Nplayer = styled.div`
   height: 100vh;
   background: green;
   position:absolute;
-  top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   z-index:100000;
   .top{
     height: 80px;
@@ -91,6 +93,7 @@ export const Nplayer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    color:#fff;
     .pro-bar{
       width: 6rem;
       margin: 0 0.5rem;
@@ -110,8 +113,8 @@ export const Nplayer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-size: 40px; 
-    width: 90%;
+    font-size: 35px; 
+    color:#fff;
   }
 `
 

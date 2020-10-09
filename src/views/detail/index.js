@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
-import { Scrollbars } from 'react-custom-scrollbars';
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 // import { getSongUrl } from '@/utils'
 

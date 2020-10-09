@@ -1,12 +1,17 @@
 body, .App{
   background: #efefef !important;
   width: 750px !important;
-  height: 100vh;
-  overflow: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
 }
 .app-wrap{
   flex: 1;
+}
+.player-wrap-all{
+  position: fixed;
+  width: 750px !important;
+  height: 190px;
+  bottom: 0;
+  z-index: 2000;
 }

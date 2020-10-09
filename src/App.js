@@ -3,20 +3,20 @@ import { BrowserRouter} from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import {routes} from './router/index'
 import Player from '@/views/player'
-import { Scrollbars } from 'react-custom-scrollbars';
+import Header from '@/views/header'
 import './index.css'
 function App() {
   return (
     <div className="App">
       <div className="app-wrap">
-      <Scrollbars>
+        <Header></Header>
         <BrowserRouter>
           {renderRoutes(routes)}
         </BrowserRouter>
-      </Scrollbars>
-        
       </div>
-      <Player></Player>
+      <div className="player-wrap-all">
+        <Player></Player>
+      </div>
     </div>
   );
 }

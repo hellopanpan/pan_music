@@ -144,11 +144,10 @@ const Player = memo((props) => {
           {
             circle ? <LoginOutlined onClick={toggleCircle}/> : <SyncOutlined onClick={toggleCircle}/>
           }
-          
-          
           <VerticalRightOutlined onClick={() => goNext(player2.id, playList, false) } />
           {icon}
           <VerticalLeftOutlined onClick={() => goNext(player2.id, playList, true) } />
+          <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
         </div>
       </div>
       
