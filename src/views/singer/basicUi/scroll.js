@@ -8,7 +8,7 @@ import {
 
 function Scroll (props){
 
-  const [check, setCheck] = useState(0);
+  const [check, setCheck] = useState(-1);
   const {data, title} = props;
   const {clickButton} = props;
 
@@ -24,6 +24,11 @@ function Scroll (props){
       mouseWheel: true
     });
   });
+  
+  const clickBtn = (item, index) => {
+    clickButton(item)
+    setCheck(index)
+  }
 
   return (
     <SingerWrap>
@@ -31,8 +36,8 @@ function Scroll (props){
         <div className="cate" >
           <p className="title">{title}</p>
           {
-            data.map(item => {
-              return <div className="cate-item" key={item.name} onClick={() => clickButton(item)}>{item.name}</div>
+            data.map((item, index) => {
+              return <div className={`cate-item ${check === index ? 'select': '' }`} key={item.name} onClick={() => clickBtn(item, index)}>{item.name}</div>
             })
           }
         </div>

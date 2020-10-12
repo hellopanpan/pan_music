@@ -25,13 +25,14 @@ import {
 import Lrc from './lrc'
 const Player = memo((props) => {
   let { play, volume, src, player2, playList, showMini , circle} = props;
-  let { setplay, setCurrenttimestate, openMusic, toggleMini, goNext, removeSong , toggleCircle} = props;
+  let { setplay, setCurrenttimestate, openMusic, toggleMini, goNext, removeSong , toggleCircle, openPlayer} = props;
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [showListflag, setShowListflag] = useState(false)
   const audioRef = useRef();
   const playerRef = useRef();
+
   useEffect(() => {
     if (src) {
       audioRef.current.src = src;
@@ -40,14 +41,18 @@ const Player = memo((props) => {
       if (!play) setplay()
     }
   }, [src]);
+
   // 播放暂停？
   useEffect(() => {
     if (audioRef.current) {
       if (play) audioRef.current.play();
       if (!play) audioRef.current.pause();
-    }    
+      openPlayer()
+    }
     playerRef.current = true
+    
   }, [play]);
+
   // 声音
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume / 100
@@ -56,6 +61,7 @@ const Player = memo((props) => {
     play ? <div className="ico" onClick={setplay}><PauseCircleFilled /></div> 
       : <div  className="ico" onClick={setplay}><PlayCircleFilled /></div>
   )
+
   // 时间播放新位置
   let updateTime = () => {
     setDuration(audioRef.current.duration)
@@ -64,25 +70,30 @@ const Player = memo((props) => {
     // 播放下一曲
     if ((audioRef.current.duration - audioRef.current.currentTime <= 1) && !circle) goNext(player2.id, playList, true) 
   }
+
   let setDurationsit = (value) => {
     audioRef.current.currentTime = value / 100 * duration
   }
+
   // 获取时分
   const getSecondMin = (sec) => {
     let min = parseInt(sec) / 60 > 0 ? parseInt(parseInt(sec) / 60) : '0'
     let sec2= parseInt(parseInt(sec) % 60)
     return `${min >= 10 ? min : '0' + min}: ${sec2 >= 10 ? sec2 : '0' + sec2}`
   }
+
   // 放歌
   const goSong =  (e, item) => {
     e.stopPropagation();
     openMusic(item)
   }
+
   // 清除 放歌
   const  goremoveSong =  (e, item, player2, playList) => {
     e.stopPropagation();
     removeSong(item, player2, playList)
   }
+
   // 播放列表
   let list = (
     <PlayListI onClick={(e) => {goList(e, false)}}>
@@ -107,14 +118,16 @@ const Player = memo((props) => {
       </div>
     </PlayListI>
   )
+
   const goList = (e, flag) => {
     e.stopPropagation();
     setShowListflag(flag)
   }
+
   // mini palyer
   let mini = (
     <IPlayer>
-      <img src={player2.pic} className="pic" alt="" onClick={toggleMini} />
+      {player2.pic ? <img src={ player2.pic + '?param=100x100' } className="pic" alt="" onClick={toggleMini} /> : null }
       <div className="title-wrap" onClick={toggleMini}>
         <div className="name">{player2.title}</div>
         <div className="singer">{player2.singer}</div>
@@ -123,6 +136,7 @@ const Player = memo((props) => {
       <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
     </IPlayer>
   )
+
   //  大号音乐播放
   let normal = (
     <Nplayer >
@@ -153,6 +167,8 @@ const Player = memo((props) => {
       
     </Nplayer>
   )
+
+  // 播放器主体
   let playerRender = (
     <AudioWrap>
       <audio 
@@ -167,6 +183,7 @@ const Player = memo((props) => {
       {showListflag ? list : null}
     </AudioWrap>
   )
+
   return playerRef.current ? playerRender : null
 });
 const mapStateToProps = (state) => {
@@ -184,6 +201,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    openPlayer() {
+      const action = actionsCreators.openPlayer()
+      dispatch(action)
+    },
     setplay(flag) {
       const action = actionsCreators.setPlay(flag)
       dispatch(action)

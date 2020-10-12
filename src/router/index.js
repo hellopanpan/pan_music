@@ -1,6 +1,7 @@
 import Header from '@/views/header/index'
 import Detail from '@/views/detail/index'
 import Search from '@/views/search/index'
+import SingerDetail from '@/views/singerDetail/index'
 const routes = [
   {
     path:'/',
@@ -15,6 +16,11 @@ const routes = [
   {
     path:'/search',
     component: Search,
+    exact:true
+  },
+  {
+    path:'/singerDetail',
+    component: SingerDetail,
     exact:true
   }
 ]

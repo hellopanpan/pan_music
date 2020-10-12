@@ -24,30 +24,55 @@ function Singer (props){
   const wrapRef = useRef();
   const usescollRef = useRef();
   const [artists, SetArtists] = useState([]);
+  const [category, SetCategory] = useState('');
+
   const dataRef = useRef();
   const pageRef = useRef(0);
+  const categoryRef = useRef('');
+  const initialRef = useRef('');
+
   // 获取数据
-  const getArtists = (initial, cat) => {
+  const getArtists = (cat, initial) => {
     let params = {
       offset: pageRef.current,
-      initial,
-      cat
+      initial: initialRef.current,
+      cat: categoryRef.current
     }
     if (pageRef.current > 100) return
-    api.getArtists(params).then(res => {
-      if (!dataRef.current) dataRef.current = res.artists || []
-      if (dataRef.current) dataRef.current  = dataRef.current.concat(res.artists || [])
+    let ajaxObj  = {}
+    if (initialRef.current || categoryRef.current ) {
+      ajaxObj = api.getArtistsList(params)
+    } else {
+      ajaxObj = api.getArtists(params)
+    }
+    ajaxObj.then(res => {
+      if (!pageRef.current) dataRef.current = res.artists || []
+      if (pageRef.current) dataRef.current  = dataRef.current.concat(res.artists || [])
       
       SetArtists(dataRef.current)
       pageRef.current += 50
       console.log(artists)
+      
     })
   }
+
   
   // 点击
-  const clickButtonCate = (key) => {
-    debugger
-    console.log(key)
+  const clickButtonCate = (item) => {
+    console.log(item)
+    if(categoryRef.current === item.key) return;
+    categoryRef.current = item.key;
+    pageRef.current = 0;
+    getArtists()
+  }
+
+  // 点击字母
+  const clickButtonAlpha = (item) => {
+
+    if(initialRef.current === item.key) return;
+    initialRef.current = item.key;
+    pageRef.current = 0;
+    getArtists()
   }
 
   useEffect(() => {
@@ -64,24 +89,35 @@ function Singer (props){
       getArtists()
       setTimeout(()=>{
         usescollRef.current.finishPullUp()
-      }, 2000)
+      }, 3000)
     })
   }, []);
 
   useEffect(() => {
     getArtists()
   }, []);
+
+  // 跳转
+  const goSingerDetail =  (item) => {
+    props.history.push({
+      pathname : '/singerDetail',
+      state :{
+        id: item.id
+      }
+    });
+  }
+
   return (
     <SingerWraper>
       <ScrollUi data={categoryTypes} title='分类（默认）：' clickButton={clickButtonCate}></ScrollUi>
-      <ScrollUi data={alphaTypes} title='首字母：'></ScrollUi>
+      <ScrollUi data={alphaTypes} title='首字母：' clickButton={clickButtonAlpha} ></ScrollUi>
       <SingerList>
         <div ref={wrapRef} className="wraper">
           <div className='ul-list'>
             {
               artists.map((item, index) => {
                 return (
-                  <div className="list" key={index}>
+                  <div className="list" key={index} onClick={() => {goSingerDetail(item)}}>
                     <img src={item.picUrl + '?param=100x100'} alt=""/>
                     <span>{ item.name }</span>
                   </div>

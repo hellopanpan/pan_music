@@ -23,6 +23,16 @@ export const SingerWrap = styled.div`
       display: inline-block;
       font-size: 16px;
       margin-right: 10px;
+      height: 20px;
+      line-height: 18px;
+      padding: 0 4px;
+      &.select{
+        border: 1px solid #efefef;
+        border-radius: 8px;
+        background: green;
+        color: #fff;
+
+      }
     }
   }
 `;

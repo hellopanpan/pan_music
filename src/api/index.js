@@ -56,3 +56,19 @@ export const getArtists = params => {
     params
   })
 };
+// 获取歌手 搜索条件
+export const getArtistsList = params => {
+  return fetch({
+    method: 'get',
+    url: '/artist/list',
+    params
+  })
+};
+// 获取歌手 详情
+export const getArtistsListDetail = params => {
+  return fetch({
+    method: 'get',
+    url: '/artists',
+    params
+  })
+};

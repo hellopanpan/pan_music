@@ -49,7 +49,7 @@ function Header (props){
           }
         </NavTab>
       </HeaderWraper>
-      {check === 0 ? <Recommend history={props.history}></Recommend> : check === 1 ? <Singer></Singer> : null}
+      {check === 0 ? <Recommend history={props.history}></Recommend> : check === 1 ? <Singer history={props.history} ></Singer> : null}
     </Wrap>
     
   ); 

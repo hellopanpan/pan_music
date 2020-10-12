@@ -9,8 +9,10 @@ import {
   TOGGlE_MINI,
   SET_REMOVE,
   TOGGLE_CIRCLE,
-  PUSH_LIST
- } from './actionType'
+  PUSH_LIST,
+  OPEN_PLAYER
+} from './actionType'
+
 import * as api from '@/api'
 export const setPlay = () => ({
   type: SET_PLAY
@@ -53,6 +55,10 @@ export const toggleMini = () => ({
 export const removeSong = (item) => ({
   type: SET_REMOVE,
   value: item
+});
+// 打开音乐播放器
+export const openPlayer = () => ({
+  type: OPEN_PLAYER
 });
 //移除歌曲
 export const toggleCircle = (item) => ({
