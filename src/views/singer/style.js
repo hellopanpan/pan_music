@@ -1,22 +1,16 @@
 import styled from 'styled-components'
 
 export const SingerWraper = styled.div`
-  height: 100%;
   width: 100%;
   background: #777;
-  .player-bottom{
-    height: 60px;
-    width: 100%;
-    background: green;
-  }
-
+  height: 100%;
 `
 export const SingerList  = styled.div`
   width: 100%; 
   background: green;
   height: 100%;
   .wraper{
-    height: 400px;
+    height: 100%;
     width: 100%;
     overflow: hidden;
     background: #eee;

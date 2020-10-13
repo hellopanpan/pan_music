@@ -5,12 +5,12 @@ export const AudioWrap = styled.div`
   }
 `
 export const IPlayer = styled.div`
-  box-shadow: 0px -2px 5px #333;
+  box-shadow: 0px -2px 3px #efefef;
   position: absolute;
   bottom: 0;
   height: 100px;
   width: 100%;
-  background:green;
+  background:#fff;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -36,7 +36,7 @@ export const IPlayer = styled.div`
   }
   .singer{
     font-size: 16px;
-    color: #888;
+    color: #999;
   }
   .ico{
     font-size: 30px;
@@ -44,6 +44,7 @@ export const IPlayer = styled.div`
   .anticon{
     font-size: 30px;
     margin-left: 10px;
+    color: green;
   }
 `;
 export const Nplayer = styled.div`
@@ -55,11 +56,12 @@ export const Nplayer = styled.div`
   bottom: 0;
   z-index:100000;
   .top{
-    height: 80px;
+    height: 100px;
     padding: 10px 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    box-sizing: border-box;
     .anticon{
       font-size: 30px;
       color: #fff;
@@ -74,7 +76,7 @@ export const Nplayer = styled.div`
     width: 100%;
     position: absolute;
     z-index: 100000;
-    background: #666;
+    background: #fff;
     top: 100px;
     left: 0;
     right: 0;
@@ -93,16 +95,17 @@ export const Nplayer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    color:#fff;
+    color:#333;
+    padding-top: 10px;
     .pro-bar{
       width: 6rem;
       margin: 0 0.5rem;
     }
     .cur{
-      width: 1rem;
+      width: 40px;
     }
     .total{
-      width: 1rem;
+      width: 40px;
     }
   }
   .ico{
@@ -114,7 +117,7 @@ export const Nplayer = styled.div`
     align-items: center;
     justify-content: space-between;
     font-size: 35px; 
-    color:#fff;
+    color:green;
   }
 `
 
@@ -125,16 +128,16 @@ export const PlayListI = styled.div`
     left: 0;
     height: 100vh;
     width: 100%;
-    background:rgba(0,0, 0, 0.3);
+    background:rgba(0,0, 0, 0.5);
     color: #fff;
     z-index:100001;
     .wrap{
-      top: 300px;
+      top: 200px;
       width: 100%;
       position:absolute;
       bottom: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: #fff;
       padding: 20px 0;
     }
     .wraper-list{
@@ -150,10 +153,11 @@ export const PlayListI = styled.div`
       padding: 0.15rem 0.5rem;
       font-size: 0.4rem;
       cursor: pointer;
+      color: #333
     }
     .playcon{
       width: 1rem;
-
+      color: green
     }
     .name2{
       flex: 1;
@@ -164,5 +168,6 @@ export const PlayListI = styled.div`
     .icos{
       width: 1rem;
       padding-left: 0.2rem;
+      color: green
     }
 `

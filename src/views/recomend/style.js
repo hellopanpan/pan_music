@@ -20,7 +20,6 @@ export const Hederimg = styled.a.attrs({
 export const Nav = styled.div`
   height: 50px;
   width:100%;
-  background: green;
   color: #fff;
   font-size: 20px;
   display: flex;
@@ -53,7 +52,6 @@ export const NavTabItem = styled.div`
 `;
 export const Recomand = styled.div`
   width:100%;
-  background: green;
   color: #fff;
   font-size: 20px;
   display: flex;
@@ -61,6 +59,7 @@ export const Recomand = styled.div`
   flex-direction: row;
   flex-wrap: wrap;  
   align-items: flex-start;
+  background: #fff;
   padding: 20px 15px;
   .item{
     width: 30%;
@@ -82,7 +81,7 @@ export const Recomand = styled.div`
       height: 3rem;
     }
     .dis{
-      font-size: 0.2rem;
+      font-size: 13px;
       padding-top: 0.1rem;
       text-overflow: -o-ellipsis-lastline;
       overflow: hidden;
@@ -90,21 +89,38 @@ export const Recomand = styled.div`
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical; 
+      color: green;
     }
   }
   
 `;
-export const SlideIn = styled.div`
-  height: 4rem;  
+export const SlideWrap = styled.div`
+  height: 165px;  
   width: 100%;
-  background: #999;
+  position: relative;
+  background: #fff;
+  .bg-img{
+    height: 120px;
+    width: 100%;
+    background: green;
+  }
+`
+export const SlideIn = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 2%;
+  height: 160px;  
+  width: 96%;
+
+  border-radius: 10px;
+  overflow: hidden;
   .img-pic{
     width: 100%;
-    height: 4rem;
+    height: 160px;  
   }
   .ant-carousel .slick-slide {
     text-align: center;
-    height: 4rem;
+    height: 160px;  
     background: #364d79;
     overflow: hidden;
   }
@@ -112,30 +128,3 @@ export const SlideIn = styled.div`
     color: #fff;
   }
 `;
-
-export const HeaderSearch = styled.input.attrs({
-  placeholder: '我搜搜'
-})`
-  width: 120px;
-  height: 20px;
-  background: #aaa;
-  border: 1px solid #efefef;
-  border-radius: 10px;
-  outline: none;
-  padding: 0 10px;
-  &.search{
-    background: green
-  }
-  &.fade-enter{
-    transition: all 0.5s;
-  }
-  &.fade-enter-active{
-    width: 300px;
-  }
-  &.fade-exit{
-    transition: all 0.5s;
-  }
-  &.fade-exit-active{
-    width: 100px;
-  }
-`

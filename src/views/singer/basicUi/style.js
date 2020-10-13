@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const SingerWrap = styled.div`
   height: auto;
   width: 100%;
-  background: #777;
+  background: green;
   
   .list-wrapper{
     white-space: nowrap;
@@ -17,7 +17,7 @@ export const SingerWrap = styled.div`
     background-color: #fff;
     .title{
       display: inline-block;
-      font-size: 18px;
+      font-size: 15px;
     }
     .cate-item{
       display: inline-block;

@@ -31,6 +31,7 @@ function Singer (props){
   const categoryRef = useRef('');
   const initialRef = useRef('');
 
+
   // 获取数据
   const getArtists = (cat, initial) => {
     let params = {
@@ -128,7 +129,6 @@ function Singer (props){
           
         </div>
       </SingerList>
-      <div className="player-bottom"></div>
     </SingerWraper>
   ); 
 };

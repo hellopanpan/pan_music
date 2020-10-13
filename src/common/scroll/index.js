@@ -24,7 +24,7 @@ function Scroll (props){
       mouseWheel: true,
       probeType: 3
     });  
-  }, [showListflag]);
+  }, []);
 
   return (
     <ScrollCont ref={wrapRef}>

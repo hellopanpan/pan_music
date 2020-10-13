@@ -3,8 +3,22 @@ import logoPic from '@/statics/images/logo512.png'
 
 export const Wrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: #777;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  .cont-wrap{
+    height: 500px;
+    background: green;
+    width: 100%;
+    flex: 1;
+  }
+  .player-wrap{
+    height: 100px;
+    background: green;
+    width: 100%;
+  }
 `;
 
 export const HeaderWraper = styled.div`
@@ -27,7 +41,7 @@ export const Nav = styled.div`
   width:100%;
   background: green;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -36,11 +50,11 @@ export const Nav = styled.div`
   box-sizing: border-box;
 `;
 export const NavTab = styled.div`
-  height: 60px;
+  height: 50px;
   width:100%;
   background: green;
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -49,8 +63,9 @@ export const NavTab = styled.div`
   box-sizing: border-box;
 `;
 export const NavTabItem = styled.div`
-  height: 40px;
-  width:60px;
+  height: 28px;
+  line-height: 25px;
+  width:50px;
   text-align: center;
   &.active{
     border-bottom: 2px solid #fff;

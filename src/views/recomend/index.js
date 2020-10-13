@@ -8,11 +8,15 @@ import { Carousel } from 'antd';
 import {
   CustomerServiceOutlined
 } from '@ant-design/icons';
+
 import { 
   HeaderWraper,
+  SlideWrap,
   SlideIn,
   Recomand
 } from './style';
+
+import Scroll from '@/common/scroll'
 
 function Header (props){
   let { banner, personal, getBaner, getPersonal}  = props;
@@ -37,31 +41,38 @@ function Header (props){
     getPersonal();
   }, [getBaner, getPersonal])
   return (
-    <HeaderWraper>
-      <SlideIn>
-        <Carousel afterChange={onChange} autoplay>
-          {banner.map(item => {
-            return <div key={item.targetId}><img src={item.imageUrl}  className="img-pic" alt=""/></div>
+    <Scroll>
+      <HeaderWraper>
+        <SlideWrap>
+          <div className="bg-img"></div>
+          <SlideIn>
+            <Carousel afterChange={onChange} autoplay>
+              {banner.map(item => {
+                return <div key={item.targetId}><img src={item.imageUrl && item.imageUrl + '?param=700x500'}  className="img-pic" alt=""/></div>
+              })}
+            </Carousel>
+          </SlideIn>
+        </SlideWrap>
+        
+        <Recomand>
+          {personal.map((item, index) => {
+            return (
+              <div className="item" key={index} onClick={() => {goDetail(item.id)}}>
+                <div className="heder">
+                  <CustomerServiceOutlined />
+                  <span className="con">{getW(item.playCount)}</span>
+                </div>
+                <img src={item.picUrl} alt=""/>
+                <div className="dis">
+                  {item.name}
+                </div>
+              </div>
+            )
           })}
-        </Carousel>
-      </SlideIn>
-      <Recomand>
-        {personal.map((item, index) => {
-          return (
-            <div className="item" key={index} onClick={() => {goDetail(item.id)}}>
-              <div className="heder">
-                <CustomerServiceOutlined />
-                <span className="con">{getW(item.playCount)}</span>
-              </div>
-              <img src={item.picUrl} alt=""/>
-              <div className="dis">
-                {item.name}
-              </div>
-            </div>
-          )
-        })}
-      </Recomand> 
-    </HeaderWraper>
+        </Recomand> 
+      </HeaderWraper>
+    </Scroll>
+    
   ); 
 };
 const mapStateToProps = (state) => {
