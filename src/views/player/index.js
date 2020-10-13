@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
+import BScroll from 'better-scroll'
 
 import { Slider } from 'antd';
 // 图标
@@ -30,8 +31,11 @@ const Player = memo((props) => {
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
   const [showListflag, setShowListflag] = useState(false)
+
   const audioRef = useRef();
   const playerRef = useRef();
+  const wrapRef = useRef();
+  const usescollRef = useRef();
 
   useEffect(() => {
     if (src) {
@@ -94,26 +98,40 @@ const Player = memo((props) => {
     removeSong(item, player2, playList)
   }
 
+  // 滚动
+  useEffect(() => {
+    if (!wrapRef.current) return
+    usescollRef.current = new BScroll(wrapRef.current, {
+      scrollY: true,
+      click: true,
+      bounce: true,
+      mouseWheel: true,
+      probeType: 3
+    });  
+  }, [showListflag]);
+
   // 播放列表
   let list = (
     <PlayListI onClick={(e) => {goList(e, false)}}>
-      <div className="wrap" >
-        <div onClick={(e) => {e.stopPropagation()}}>
-          {
-            playList.map(((item, index) => {
-              return (
-                <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
-                  <div className="playcon">
-                    {player2.id === item.id ? <PlayCircleFilled /> : null}
+      <div className="wrap" onClick={(e) => {e.stopPropagation()}}>
+        <div className="wraper-list" ref={wrapRef}>
+          <div>
+            {
+              playList.map(((item, index) => {
+                return (
+                  <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
+                    <div className="playcon">
+                      {player2.id === item.id ? <PlayCircleFilled /> : null}
+                    </div>
+                    <div className="name2">{item.title}</div>
+                    <div className="icos">
+                      <DeleteFilled onClick={(e) => {goremoveSong(e, item, player2, playList)}}/>
+                    </div>
                   </div>
-                  <div className="name2">{item.title}</div>
-                  <div className="icos">
-                    <DeleteFilled onClick={(e) => {goremoveSong(e, item, player2, playList)}}/>
-                  </div>
-                </div>
-              )
-            }))
-          }
+                )
+              }))
+            }
+          </div>
         </div>
       </div>
     </PlayListI>

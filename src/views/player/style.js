@@ -125,14 +125,22 @@ export const PlayListI = styled.div`
     left: 0;
     height: 100vh;
     width: 100%;
-    background:rgba(0,0, 0, 0.8);
+    background:rgba(0,0, 0, 0.3);
     color: #fff;
     z-index:100001;
     .wrap{
-      height: 600px;
+      top: 300px;
       width: 100%;
-      position: absolute;
+      position:absolute;
       bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 0;
+    }
+    .wraper-list{
+      height: 100%;
+      width: 100%;
+      overflow: hidden
     }
     
     .itemL{
