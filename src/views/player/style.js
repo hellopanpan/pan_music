@@ -139,6 +139,8 @@ export const PlayListI = styled.div`
       left: 0;
       background: #fff;
       padding: 20px 0;
+      transform: translate(0, 600px);
+      transition: all 0.5s;
     }
     .wraper-list{
       height: 100%;

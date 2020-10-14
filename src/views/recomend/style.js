@@ -61,6 +61,7 @@ export const Recomand = styled.div`
   align-items: flex-start;
   background: #fff;
   padding: 20px 15px;
+  min-height: 400px;
   .item{
     width: 30%;
     position: relative;

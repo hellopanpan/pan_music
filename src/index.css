@@ -5,6 +5,13 @@ body, .App{
   display: flex;
   flex-direction: column;
 }
+.loading-icon{
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 1000000;
+}
 .app-wrap{
   flex: 1;
 }

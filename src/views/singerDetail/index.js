@@ -18,6 +18,7 @@ import {
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 
 function SingerDetail (props){
+
   const {openMusic, playAllMusicList} = props
   const {openPlayer} = props
 

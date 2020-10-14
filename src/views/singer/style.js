@@ -4,11 +4,14 @@ export const SingerWraper = styled.div`
   width: 100%;
   background: #777;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
 `
 export const SingerList  = styled.div`
   width: 100%; 
   background: green;
-  height: 100%;
+  height: 90vh;
   .wraper{
     height: 100%;
     width: 100%;

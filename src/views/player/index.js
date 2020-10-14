@@ -26,6 +26,7 @@ import {
 } from './style';
 
 import Lrc from './lrc'
+import PlyerList from './list'
 import Scroll from '@/common/scroll'
 
 const Player = memo((props) => {
@@ -38,6 +39,7 @@ const Player = memo((props) => {
 
   const audioRef = useRef();
   const playerRef = useRef();
+  const listRef = useRef();
 
 
   useEffect(() => {
@@ -89,49 +91,15 @@ const Player = memo((props) => {
     return `${min >= 10 ? min : '0' + min}: ${sec2 >= 10 ? sec2 : '0' + sec2}`
   }
 
-  // 放歌
-  const goSong =  (e, item) => {
-    e.stopPropagation();
-    openMusic(item)
-  }
-
-  // 清除 放歌
-  const  goremoveSong =  (e, item, player2, playList) => {
-    e.stopPropagation();
-    removeSong(item, player2, playList)
+  // 显示列表
+  const goList = (flag) => {
+    setShowListflag(flag);
   }
 
   // 播放列表
   let list = (
-    <PlayListI onClick={(e) => {goList(e, false)}}>
-      <div className="wrap" onClick={(e) => {e.stopPropagation()}}>
-        <Scroll>
-          <div>
-              {
-                playList.map(((item, index) => {
-                  return (
-                    <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
-                      <div className="playcon">
-                        {player2.id === item.id ? <PlayCircleFilled /> : null}
-                      </div>
-                      <div className="name2">{item.title}</div>
-                      <div className="icos">
-                        <DeleteFilled onClick={(e) => {goremoveSong(e, item, player2, playList)}}/>
-                      </div>
-                    </div>
-                  )
-                }))
-              }
-            </div>
-        </Scroll>
-      </div>
-    </PlayListI>
+    <PlyerList playList={playList} goList={goList} showListflag={showListflag}></PlyerList>
   )
-
-  const goList = (e, flag) => {
-    e.stopPropagation();
-    setShowListflag(flag)
-  }
 
   // mini palyer
   let mini = (
@@ -142,7 +110,7 @@ const Player = memo((props) => {
         <div className="singer">{player2.singer}</div>
       </div>
       {icon}
-      <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
+      <AlignRightOutlined onClick={(e) => {goList(true)}}/>
     </IPlayer>
   )
 
@@ -170,7 +138,7 @@ const Player = memo((props) => {
           <VerticalRightOutlined onClick={() => goNext(player2.id, playList, false) } />
           {icon}
           <VerticalLeftOutlined onClick={() => goNext(player2.id, playList, true) } />
-          <AlignRightOutlined onClick={(e) => {goList(e, true)}}/>
+          <AlignRightOutlined onClick={(e) => {goList(true)}}/>
         </div>
       </div>
       
@@ -234,15 +202,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     toggleMini() {
       const action = actionsCreators.toggleMini()
-      dispatch(action)
-    },
-    removeSong(item, player2, list) {
-
-      if ((item.id === player2.id) && list.length >= 2) {
-        const action = actionsCreators.goNext(item.id, list, true)
-        dispatch(action)
-      }
-      const action = actionsCreators.removeSong(item)
       dispatch(action)
     },
     goNext(id, list, flag) {

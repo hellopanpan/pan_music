@@ -6,6 +6,7 @@ import {
   AlignLeftOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
+
 import { 
   Wrap,
   HeaderWraper,
@@ -16,6 +17,8 @@ import {
 
 import Recommend from '@/views/recomend/index'
 import Singer from '@/views/singer/index'
+import TopList from '@/views/topList/index'
+
 
 function Header (props){
   const {openPlayer} = props
@@ -25,7 +28,7 @@ function Header (props){
     checked: true,
     checkArr: [{name: '推荐'},{name: '歌手'},{name: '排行榜'}]
   });
-  const [check, setCheck] = useState(1);
+  const [check, setCheck] = useState(-1);
   
   const changeTab = (index) => {
     console.log(index);
@@ -50,7 +53,7 @@ function Header (props){
 
   return (
     <Wrap>
-      <HeaderWraper>
+      <HeaderWraper v-loading="loading">
         <Nav>
           <AlignLeftOutlined />
           <span>音悦台</span>
@@ -65,7 +68,7 @@ function Header (props){
         </NavTab>
       </HeaderWraper>
       <div className="cont-wrap">
-        {check === 1 ? <Recommend history={props.history}></Recommend> : check === 2 ? <Singer history={props.history} ></Singer> : null}
+        {check === 1 ? <Recommend history={props.history}></Recommend> : check === 2 ? <Singer history={props.history} ></Singer> : check === 3 ?<TopList history={props.history}></TopList> : null}
       </div>
       { openPlayer ? <div className="player-wrap"></div> : null}
       

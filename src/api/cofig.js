@@ -169,3 +169,5 @@ export const alphaTypes = [
     name: "Z"
   }
 ];
+// 推荐搜索
+export const searchKey = ['薛之谦', '周杰伦', '林俊杰', '夜夜夜', '烟火','我的一个道姑']

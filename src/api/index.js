@@ -72,3 +72,11 @@ export const getArtistsListDetail = params => {
     params
   })
 };
+// 排行榜
+export const getTopList = params => {
+  return fetch({
+    method: 'get',
+    url: '/toplist/detail',
+    params
+  })
+};

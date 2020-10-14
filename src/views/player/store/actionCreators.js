@@ -10,7 +10,8 @@ import {
   SET_REMOVE,
   TOGGLE_CIRCLE,
   PUSH_LIST,
-  OPEN_PLAYER
+  OPEN_PLAYER,
+  SET_LOADING
 } from './actionType'
 
 import * as api from '@/api'
@@ -20,6 +21,10 @@ export const setPlay = () => ({
 export const setVolume = (num) => ({
   type: SET_VOLUME,
   value: num
+});
+export const setLoading = (value) => ({
+  type: SET_LOADING,
+  value
 });
 export const setSrc = (src) => ({
   type: SET_SRC,

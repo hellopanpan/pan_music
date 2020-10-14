@@ -10,9 +10,11 @@ import {
 
 
 function Scroll (props){
-
+  const {bounceTop, bounceBottom} = props
+  const {handleScroll} = props
   const wrapRef = useRef();
   const usescollRef = useRef();
+
 
   // 滚动
   useEffect(() => {
@@ -22,8 +24,15 @@ function Scroll (props){
       click: true,
       bounce: true,
       mouseWheel: true,
-      probeType: 3
-    });  
+      probeType: 3,
+      bounce:{
+        top: bounceTop,
+        bottom: bounceBottom
+      }
+    }); 
+    usescollRef.current.on('scroll', (pos) => {
+      handleScroll(pos)
+    });
   }, []);
 
   return (
@@ -33,6 +42,10 @@ function Scroll (props){
   )
 }
 
-
+Scroll.defaultProps = {
+  bounceTop: true,
+  bounceBottom: true,
+  handleScroll: (pos) => {}
+}
 
 export default Scroll;

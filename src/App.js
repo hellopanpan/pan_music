@@ -5,10 +5,15 @@ import {routes} from './router/index'
 import Player from '@/views/player'
 
 import { connect } from 'react-redux'
+import { Spin } from 'antd';
 import './index.css'
-function App() {
+function App(props) {
+  
+  const {loading} = props;
+
   return (
     <div className="App">
+      { loading? <Spin className="loading-icon" size="large"></Spin>: null }
       <div className="app-wrap">  
         <BrowserRouter>
           {renderRoutes(routes)}
@@ -20,5 +25,10 @@ function App() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    loading: state.getIn(['player', 'loading']),
+  };
+};
 
-export default connect(null, null)(App);
+export default connect(mapStateToProps, null)(App);

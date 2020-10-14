@@ -21,7 +21,8 @@ function Scroll (props){
       scrollX: true,
       click: true,
       bounce: true,
-      mouseWheel: true
+      mouseWheel: true,
+
     });
   });
   

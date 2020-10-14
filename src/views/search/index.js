@@ -1,12 +1,15 @@
-import React , {useState, useRef} from 'react';
+import React , {useState, useRef, useCallback} from 'react';
 import { connect } from 'react-redux'
 import { Input } from 'antd';
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
+import Scroll from '@/common/scroll'
+
 // 样式
 import { 
   SearchWraper,
   SearList
 } from './style';
+
 // 图标
 import {
   ArrowLeftOutlined,
@@ -14,37 +17,42 @@ import {
 } from '@ant-design/icons';
 
 import { getSuggest, getSearch } from '@/api'
+import {searchKey} from '@/api/cofig'
+import { useEffect } from 'react';
+
 function Header (props){
   const {openMusic}  = props
   const [keyword, setKeyword] = useState('')
   const [songs, setSongs] = useState([])
   const timerRef = useRef()
-  const getSeachList = (keywords) => {
-    getSuggest({
-      keywords
-    }).then(res => {
-      
-    })
+  const getSeachList = () => {
     // 搜索结果
     getSearch({
-      keywords
+      keywords: keyword
     }).then(res => {
       setSongs(res.result.songs || [])
     })
   }
-  const changeWord = (e) => {
+  const changeWord = useCallback((e) => {
     const val = e.target.value;
     setKeyword(val)
-    clearTimeout(timerRef.current)
-    if (!e.target.value) return;
-    timerRef.current = setTimeout(() => {
-      getSeachList(val)
-    }, 500);
-  }
+  },[])
+
   const closeKey = (e) => {
     setKeyword('')
     setSongs([]) 
   }
+
+  // 搜索
+  const hotSearch = (key) => {
+    setKeyword(key)
+  };
+
+  useEffect(() => {
+    if (!keyword) return setSongs([]) 
+    getSeachList()
+  }, [keyword])
+
   return (
     <SearchWraper>
       <div className="serch">
@@ -52,19 +60,39 @@ function Header (props){
         <Input className="input-it" placeholder="输入搜索内容" value={keyword}  onChange={changeWord}/>
         <CloseOutlined onClick={closeKey}/>
       </div>
-      
+      {
+        !keyword ? 
+          <div className="suggest">
+            <div className="title">推荐搜索</div>
+            <div className="list">
+              {
+                searchKey.map((item, index) => {
+                  return (
+                    <div className="item" key={index} onClick={() => {hotSearch(item)}} >{item}</div>
+                  )
+                })
+              }
+            </div>
+          </div>
+        : null
+      }
       <SearList>
-        {
-          songs.map((item, index) => {
-            return (
-              <div key={index} className="list-item" onClick={()=> {openMusic(item)}}>
-                <div className="title">{item.name}</div>
-                <div>{item.artists && item.artists[0].name} - {item.album && item.album.name}</div>
-              </div>
-              
-            )
-          })
-        }
+        <Scroll>
+          <div>
+          {
+            songs.map((item, index) => {
+              return (
+                <div key={index} className="list-item" onClick={()=> {openMusic(item)}}>
+                  <div className="title">{item.name}</div>
+                  <div>{item.artists && item.artists[0].name} - {item.album && item.album.name}</div>
+                </div>
+                
+              )
+            })
+          }
+          </div>
+        </Scroll>
+        
       </SearList>
     </SearchWraper>
     
