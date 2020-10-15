@@ -55,9 +55,9 @@ function Header (props){
     <Wrap>
       <HeaderWraper v-loading="loading">
         <Nav>
-          <AlignLeftOutlined />
+          <AlignLeftOutlined className="more"/>
           <span>音悦台</span>
-          <SearchOutlined onClick={goSearch}/>
+          <SearchOutlined className="search" onClick={goSearch}/>
         </Nav>
         <NavTab>
           {

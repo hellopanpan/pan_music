@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 // import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
+import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 
 import { Carousel } from 'antd';
 // 图标
@@ -16,14 +17,12 @@ import {
   Recomand
 } from './style';
 
+import * as api from '@/api'
 import Scroll from '@/common/scroll'
 
 function Header (props){
-  let { banner, personal, getBaner, getPersonal}  = props;
-  console.log('recomend --- ' + props)
-  const onChange = (a, b, c) => {
-    console.log(a, b, c);
-  }
+  let { banner, personal, getBaner, getPersonal, openMusic}  = props;
+
   const getW = (num) => {
     return parseInt(num / 10000) + '万'
   }
@@ -35,20 +34,30 @@ function Header (props){
         id
       }
     });
-  }
+  };
   useEffect(() => {
     getBaner();
     getPersonal();
   }, [getBaner, getPersonal])
+
+  const openMusicAnd = (id) => {
+    let params = {
+      ids: id
+    }
+    api.getSongsDetail(params).then(res => {
+      if (res.songs && res.songs[0]) openMusic(res.songs[0])
+    })
+  }
+
   return (
     <Scroll>
       <HeaderWraper>
         <SlideWrap>
           <div className="bg-img"></div>
           <SlideIn>
-            <Carousel afterChange={onChange} autoplay>
+            <Carousel autoplay>
               {banner.map(item => {
-                return <div key={item.targetId}><img src={item.imageUrl && item.imageUrl + '?param=700x500'}  className="img-pic" alt=""/></div>
+                return <div key={item.targetId} onClick={() => openMusicAnd(item.targetId)}><img src={item.imageUrl && item.imageUrl + '?param=700x500'}  className="img-pic" alt=""/></div>
               })}
             </Carousel>
           </SlideIn>
@@ -91,8 +100,24 @@ const mapDispatchToProps = (dispatch) => {
     getPersonal() {
       const action = actionsCreators.getPersonal()
       dispatch(action)
-    }
+    },
+    openMusic(item) {
+      let info = {
+        title: item.name,
+        singer: item.ar && item.ar[0].name,
+        alname: item.al && item.al.name,
+        pic: item.al && item.al.picUrl,
+        id: item.id
+      }
+      const action = actionsCreatorsPlayer.getSrc(item.id)
+      const action2 = actionsCreatorsPlayer.setCurrentPlayer(info)
+      const action3 = actionsCreatorsPlayer.pushPlaylist(info)
+      dispatch(action)
+      dispatch(action2)
+      dispatch(action3)
+    },
   };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

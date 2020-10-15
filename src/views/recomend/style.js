@@ -60,7 +60,7 @@ export const Recomand = styled.div`
   flex-wrap: wrap;  
   align-items: flex-start;
   background: #fff;
-  padding: 20px 15px;
+  padding: 10px 15px;
   min-height: 400px;
   .item{
     width: 30%;
@@ -96,32 +96,32 @@ export const Recomand = styled.div`
   
 `;
 export const SlideWrap = styled.div`
-  height: 165px;  
+  height: 4.2rem;  
   width: 100%;
   position: relative;
   background: #fff;
   .bg-img{
-    height: 120px;
+    height: 2.8rem;
     width: 100%;
     background: green;
   }
 `
 export const SlideIn = styled.div`
   position: absolute;
-  top: 0px;
+  top: 10px;
   left: 2%;
-  height: 160px;  
+  height: 4rem;  
   width: 96%;
 
   border-radius: 10px;
   overflow: hidden;
   .img-pic{
     width: 100%;
-    height: 160px;  
+    height: 4rem;  
   }
   .ant-carousel .slick-slide {
     text-align: center;
-    height: 160px;  
+    height: 4rem;  
     background: #364d79;
     overflow: hidden;
   }

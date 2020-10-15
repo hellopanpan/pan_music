@@ -7,7 +7,7 @@ import {
 } from './style';
 
 function Scroll (props){
-
+  const {bounceTime}  = props
   const [check, setCheck] = useState(-1);
   const {data, title} = props;
   const {clickButton} = props;
@@ -22,7 +22,7 @@ function Scroll (props){
       click: true,
       bounce: true,
       mouseWheel: true,
-
+      bounceTime: bounceTime
     });
   });
   
@@ -47,4 +47,7 @@ function Scroll (props){
   ); 
 };
 
+Scroll.defaultProps = {
+  bounceTime: 800
+}
 export default Scroll;

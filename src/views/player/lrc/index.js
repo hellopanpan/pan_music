@@ -61,7 +61,7 @@ function LRC (props, ref){
   
   useEffect(() => {
     if (!src) return;
-    let id = src.match(/\d{6,20}/)
+    let id = src.match(/\d{5,20}/)
     if (id) getlrc(id[0])
   }, [src, getlrc]) 
   // 获取歌词

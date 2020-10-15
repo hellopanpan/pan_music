@@ -111,7 +111,7 @@ function Singer (props){
   return (
     <SingerWraper>
       <ScrollUi data={categoryTypes} title='分类（默认）：' clickButton={clickButtonCate}></ScrollUi>
-      <ScrollUi data={alphaTypes} title='首字母：' clickButton={clickButtonAlpha} ></ScrollUi>
+      <ScrollUi data={alphaTypes} title='首字母：' clickButton={clickButtonAlpha} bounceTime={200}></ScrollUi>
       <SingerList>
         <div ref={wrapRef} className="wraper">
           <div className='ul-list'>

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import logoPic from '@/statics/images/logo512.png'
 
 export const Wrap = styled.div`
   width: 100%;
@@ -26,15 +25,6 @@ export const HeaderWraper = styled.div`
   background: #777;
 `;
 
-export const Hederimg = styled.a.attrs({
-  href: '/'
-})`
-  display: inline-block;
-  height: 30px;
-  width: 40px;
-  background: url(${logoPic});
-  background-size: 100% 100%;
-`;
 
 export const Nav = styled.div`
   height: 50px;
@@ -48,6 +38,12 @@ export const Nav = styled.div`
   align-items: center;
   padding: 10px;
   box-sizing: border-box;
+  .search{
+    font-size: 22px;
+  }
+  .more{
+    font-size: 18px;
+  }
 `;
 export const NavTab = styled.div`
   height: 50px;
@@ -59,7 +55,7 @@ export const NavTab = styled.div`
   justify-content: space-between;
   flex-direction: row;
   align-items: flex-start;
-  padding: 10px;
+  padding: 10px 30px;
   box-sizing: border-box;
 `;
 export const NavTabItem = styled.div`
@@ -67,6 +63,7 @@ export const NavTabItem = styled.div`
   line-height: 25px;
   width:50px;
   text-align: center;
+  cursor: pointer;
   &.active{
     border-bottom: 2px solid #fff;
   }

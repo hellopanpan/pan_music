@@ -80,3 +80,12 @@ export const getTopList = params => {
     params
   })
 };
+
+//获取歌曲详情 
+export const getSongsDetail = params => {
+  return fetch({
+    method: 'get',
+    url: '/song/detail',
+    params
+  })
+};
