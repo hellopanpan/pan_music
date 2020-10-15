@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 export const Wrap = styled.div`
-  height: 400px ;
+  height: 100%;
   width: 100%;
   border-radius: 10px;
-
   overflow:hidden;
   .content{
     line-height: 30px;

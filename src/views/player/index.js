@@ -74,7 +74,7 @@ const Player = memo((props) => {
   // 时间播放新位置
   let updateTime = () => {
     setDuration(audioRef.current.duration)
-    setCurrentTime(audioRef.current.currentTime)
+    setCurrentTime(parseInt(audioRef.current.currentTime))
     setCurrenttimestate(audioRef.current.currentTime)
     // 播放下一曲
     if ((audioRef.current.duration - audioRef.current.currentTime <= 1) && !circle) goNext(player2.id, playList, true) 

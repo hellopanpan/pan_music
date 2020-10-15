@@ -10,11 +10,15 @@ import {
 
 
 function Scroll (props){
-  const {bounceTop, bounceBottom} = props
+  const {bounceTop, bounceBottom, lineEl} = props
   const {handleScroll} = props
   const wrapRef = useRef();
   const usescollRef = useRef();
 
+  // 滚动元素
+  useEffect(() => {
+    if (lineEl) usescollRef.current.scrollToElement(lineEl, 1000);
+  }, [lineEl])
 
   // 滚动
   useEffect(() => {
@@ -45,7 +49,8 @@ function Scroll (props){
 Scroll.defaultProps = {
   bounceTop: true,
   bounceBottom: true,
-  handleScroll: (pos) => {}
+  handleScroll: (pos) => {},
+  lineEl: null
 }
 
 export default Scroll;
