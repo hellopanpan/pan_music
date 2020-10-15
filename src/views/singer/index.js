@@ -1,14 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 // import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import BScroll from 'better-scroll'
 import * as api from '@/api'
- 
-// 图标
-import {
-  AlignLeftOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
+import { renderRoutes } from 'react-router-config';
 
 import { 
   SingerWraper,
@@ -24,7 +19,6 @@ function Singer (props){
   const wrapRef = useRef();
   const usescollRef = useRef();
   const [artists, SetArtists] = useState([]);
-  const [category, SetCategory] = useState('');
 
   const dataRef = useRef();
   const pageRef = useRef(0);
@@ -33,7 +27,7 @@ function Singer (props){
 
 
   // 获取数据
-  const getArtists = (cat, initial) => {
+  const getArtists = useCallback((cat, initial) => {
     let params = {
       offset: pageRef.current,
       initial: initialRef.current,
@@ -52,10 +46,9 @@ function Singer (props){
       
       SetArtists(dataRef.current)
       pageRef.current += 50
-      console.log(artists)
       
     })
-  }
+  },[])
 
   
   // 点击
@@ -92,24 +85,24 @@ function Singer (props){
         usescollRef.current.finishPullUp()
       }, 3000)
     })
-  }, []);
+  }, [getArtists]);
 
   useEffect(() => {
     getArtists()
-  }, []);
+  }, [getArtists]);
 
   // 跳转
   const goSingerDetail =  (item) => {
     props.history.push({
-      pathname : '/singerDetail',
-      state :{
-        id: item.id
-      }
+      pathname : '/singerDetail/'+ item.id,
     });
   }
 
+
+
   return (
     <SingerWraper>
+      { renderRoutes(props.route.routes) }
       <ScrollUi data={categoryTypes} title='分类（默认）：' clickButton={clickButtonCate}></ScrollUi>
       <ScrollUi data={alphaTypes} title='首字母：' clickButton={clickButtonAlpha} bounceTime={200}></ScrollUi>
       <SingerList>

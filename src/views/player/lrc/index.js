@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'
-import BScroll from 'better-scroll'
 import { actionsCreators } from '../store'
 import { paserLrc } from '@/utils/lrcParse'
 import LrcScroll from './scroll'
@@ -37,7 +36,7 @@ function LRC (props, ref){
         setCurrentLineNum(index)
       }
     })
-  }, [current])
+  }, [current, time])
   
   useEffect(() => {
     if (!src) return;

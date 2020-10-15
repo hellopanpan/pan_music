@@ -1,4 +1,4 @@
-import React , {useState, useRef, useCallback} from 'react';
+import React , {useState, useCallback} from 'react';
 import { connect } from 'react-redux'
 import { Input } from 'antd';
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
@@ -16,7 +16,7 @@ import {
   CloseOutlined
 } from '@ant-design/icons';
 
-import { getSuggest, getSearch } from '@/api'
+import { getSearch } from '@/api'
 import {searchKey} from '@/api/cofig'
 import { useEffect } from 'react';
 
@@ -24,15 +24,15 @@ function Header (props){
   const {openMusic}  = props
   const [keyword, setKeyword] = useState('')
   const [songs, setSongs] = useState([])
-  const timerRef = useRef()
-  const getSeachList = () => {
+
+  const getSeachList = useCallback(() => {
     // 搜索结果
     getSearch({
       keywords: keyword
     }).then(res => {
       setSongs(res.result.songs || [])
     })
-  }
+  }, [keyword])
   const changeWord = useCallback((e) => {
     const val = e.target.value;
     setKeyword(val)
@@ -51,7 +51,7 @@ function Header (props){
   useEffect(() => {
     if (!keyword) return setSongs([]) 
     getSeachList()
-  }, [keyword])
+  }, [keyword, getSeachList])
 
   return (
     <SearchWraper>

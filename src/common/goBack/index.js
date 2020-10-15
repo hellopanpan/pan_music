@@ -6,13 +6,10 @@ import {
   ArrowLeftOutlined
 } from '@ant-design/icons';
 function GoBack (props){
-  let { title }  = props;
-  const goBack = () => {
-    window.history.back()
-  }
+  let { title, Backfn }  = props;
   return (
     <GoWraper>
-      <ArrowLeftOutlined onClick={goBack}/>
+      <ArrowLeftOutlined onClick={Backfn}/>
       <div>
         {title}
       </div>
@@ -20,5 +17,9 @@ function GoBack (props){
   ); 
 };
 
-
+GoBack.defaultProps = {
+  Backfn: () => {
+    window.history.back()
+  }
+}
 export default GoBack;

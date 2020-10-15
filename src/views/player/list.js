@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useRef} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
 
@@ -9,14 +9,10 @@ import {
 } from '@ant-design/icons';
 
 import { 
-  AudioWrap,
-  IPlayer,
-  Nplayer,
   PlayListI
 } from './style';
 
 import Scroll from '@/common/scroll'
-import { List } from 'immutable';
 
 const PlayerList = (props) => {
   
@@ -51,7 +47,7 @@ const PlayerList = (props) => {
 
   // 滚动条
   const handleScroll = (pos) => {
-    canmoveRef.current = (parseInt(pos.y) == 0)
+    canmoveRef.current = (parseInt(pos.y) === 0)
   }
   // 滑动start
   const handleTouchStart = (e) => {

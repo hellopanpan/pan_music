@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useRef, useEffect} from 'react';
 // import { CSSTransition } from 'react-transition-group'
 
 import BScroll from 'better-scroll'
@@ -26,7 +26,6 @@ function Scroll (props){
     usescollRef.current = new BScroll(wrapRef.current, {
       scrollY: true,
       click: true,
-      bounce: true,
       mouseWheel: true,
       probeType: 3,
       bounce:{
@@ -37,7 +36,7 @@ function Scroll (props){
     usescollRef.current.on('scroll', (pos) => {
       handleScroll(pos)
     });
-  }, []);
+  }, [bounceTop, bounceBottom, handleScroll]);
 
   return (
     <ScrollCont ref={wrapRef}>

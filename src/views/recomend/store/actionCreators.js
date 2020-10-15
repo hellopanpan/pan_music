@@ -27,8 +27,7 @@ export const getList = (flag) => {
 }
 export const getBaner = () => {
   // 可以return 一个函数
-  return (dispatch, getState) => {
-    let state = getState()
+  return (dispatch) => {
     // 异步操作
     api.getSongUr({}).then(res => {
       let action  = setBanner(res.banners || [])

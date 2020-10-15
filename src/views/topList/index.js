@@ -1,19 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 // import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import * as api from '@/api'
 
-// 图标
-import {
-  PlusOutlined, 
-  PlayCircleOutlined
-} from '@ant-design/icons';
 // 样式
 import { 
   Wraper
 } from './style';
 
-import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 import Scroll from '@/common/scroll'
 
 function TopList (props){

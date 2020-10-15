@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import BScroll from 'better-scroll'
 import * as api from '@/api'
 import GoBack from '@/common/goBack/index'
+import { CSSTransition } from "react-transition-group";
 
 // 图标
 import {
@@ -18,12 +19,12 @@ import {
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 
 function SingerDetail (props){
-
-  const {openMusic, playAllMusicList} = props
+  const {openMusic, playAllMusicList, history} = props
   const {openPlayer} = props
 
   const [hotSongs, setHotSongs]= useState([])
   const [artist, setArtist]= useState({})
+  const [showStatus, setShowStatus]= useState(true)
 
   const usescollRef = useRef()
   const wrapRef = useRef()
@@ -32,13 +33,14 @@ function SingerDetail (props){
 
   useEffect(() => {
     let params = {
-      id: props.history.location.state && props.history.location.state.id || 5781
+      id: (props.match.params.id) || 5781
     }
     api.getArtistsListDetail(params).then(res => {
       setHotSongs(res.hotSongs || [])
       setArtist(res.artist || {})
+      setShowStatus(true)
     });
-  }, []);
+  }, [history]);
 
   //播放全部
   const playAllMusic = (list) => {
@@ -49,6 +51,7 @@ function SingerDetail (props){
 
   // 滚动
   useEffect(() => {
+    if (!wrapRef.current) return
     usescollRef.current = new BScroll(wrapRef.current, {
       scrollY: true,
       click: true,
@@ -73,42 +76,55 @@ function SingerDetail (props){
       console.log(picRef.current.style.height)
     })
     
-  }, []);
+  }, [showStatus]);
+
+  // Backfn
+  const Backfn = () => {
+    setShowStatus(false)
+  }
 
   return (
-    <Wraper>
-      <GoBack></GoBack>
-      <div className="top-banner" ref={picRef} >
-        { artist.picUrl? <img ref={imgRef} src={artist.picUrl + '?param=400x400' } alt=""/> : null }
-        <div className="btn"><PlusOutlined/> 收藏</div>
-      </div>
-      <div className={`scoll-wrap ${openPlayer? 'open-player': ''}`} ref={wrapRef} >
-        <div>
-          <div className="title" onClick={() => {playAllMusic(hotSongs)}}>
-            <PlayCircleOutlined></PlayCircleOutlined>
-            <span className="play-text">播放全部</span>
-            <span className="all">(共37首)</span>
-          </div>
-          <div className="list">
-            {
-              hotSongs.map((item, index) => {
-                return(
-                  <div className="list-item" key={index} onClick={() => {openMusic(item)}}>
-                    <div className="num">{index + 1}</div>
-                    <div className="right">
-                      <div className="name">{item.name}</div>
-                      <div className="singer">{item.ar && item.ar[0].name} - {item.al && item.al.name}</div>
-                    </div>
-                  </div>
-                ) 
-              })
-            }
-          </div>
+    <CSSTransition 
+      in={showStatus}
+      timeout={300}
+      unmountOnExit
+      classNames="singer"
+      appear={true}
+      onExited={() => props.history.goBack()}
+    >
+      <Wraper>
+        <GoBack Backfn={Backfn}></GoBack>
+        <div className="top-banner" ref={picRef} >
+          { artist.picUrl? <img ref={imgRef} src={artist.picUrl + '?param=400x400' } alt=""/> : null }
+          <div className="btn"><PlusOutlined/> 收藏</div>
         </div>
-        
-      </div>
-    </Wraper>
-    
+        <div className={`scoll-wrap ${openPlayer? 'open-player': ''}`} ref={wrapRef} >
+          <div>
+            <div className="title" onClick={() => {playAllMusic(hotSongs)}}>
+              <PlayCircleOutlined></PlayCircleOutlined>
+              <span className="play-text">播放全部</span>
+              <span className="all">(共37首)</span>
+            </div>
+            <div className="list">
+              {
+                hotSongs.map((item, index) => {
+                  return(
+                    <div className="list-item" key={index} onClick={() => {openMusic(item)}}>
+                      <div className="num">{index + 1}</div>
+                      <div className="right">
+                        <div className="name">{item.name}</div>
+                        <div className="singer">{item.ar && item.ar[0].name} - {item.al && item.al.name}</div>
+                      </div>
+                    </div>
+                  ) 
+                })
+              }
+            </div>
+          </div>
+          
+        </div>
+      </Wraper>
+    </CSSTransition>
   )
 }
 

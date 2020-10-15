@@ -68,7 +68,7 @@ function Header (props){
         </NavTab>
       </HeaderWraper>
       <div className="cont-wrap">
-        {check === 1 ? <Recommend history={props.history}></Recommend> : check === 2 ? <Singer history={props.history} ></Singer> : check === 3 ?<TopList history={props.history}></TopList> : null}
+        {check === 1 ? <Recommend history={props.history}></Recommend> : check === 2 ? <Singer history={props.history} route={props.route}></Singer> : check === 3 ?<TopList history={props.history}></TopList> : null}
       </div>
       { openPlayer ? <div className="player-wrap"></div> : null}
       

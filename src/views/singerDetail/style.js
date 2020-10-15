@@ -4,7 +4,24 @@ export const Wraper = styled.div`
   height: 100vh;
   width: 100%;
   background: #777;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: right bottom;
+  transition: all .3s ease;
+  z-index: 3000;
+  &.singer-enter, &.singer-appear {
+    transform: rotateZ(40deg) translate3d(100%, 0, 0);
+  }
+  &.singer-enter-active, &.singer-appear-active{
+    transform: rotateZ(10deg) translate3d(0, 0, 0);
+  }
+  &.singer-exit{
+    transform: rotateZ(0deg) translate3d(0, 0, 0);
+  }
+  &.singer-exit-active{
+    transform: rotateZ(30deg) translate3d(100%, 0, 0);
+  }
   .top-banner{
     height: 300px;
     width: 100%;

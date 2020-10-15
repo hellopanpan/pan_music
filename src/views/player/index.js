@@ -2,7 +2,6 @@ import React, { useState, useEffect, memo, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
-import BScroll from 'better-scroll'
 
 import { Slider } from 'antd';
 // 图标
@@ -10,7 +9,6 @@ import {
   PlayCircleFilled,
   PauseCircleFilled,
   AlignRightOutlined,
-  DeleteFilled,
   DownOutlined,
   VerticalLeftOutlined,
   VerticalRightOutlined,
@@ -22,16 +20,15 @@ import {
   AudioWrap,
   IPlayer,
   Nplayer,
-  PlayListI
 } from './style';
 
 import Lrc from './lrc'
 import PlyerList from './list'
-import Scroll from '@/common/scroll'
+import { useCallback } from 'react';
 
 const Player = memo((props) => {
   let { play, volume, src, player2, playList, showMini , circle} = props;
-  let { setplay, setCurrenttimestate, openMusic, toggleMini, goNext, removeSong , toggleCircle, openPlayer} = props;
+  let { setplay, setCurrenttimestate, toggleMini, goNext, toggleCircle, openPlayer} = props;
 
   const [duration, setDuration] = useState(0)
   const [currentTime, setCurrentTime] = useState(0)
@@ -39,18 +36,22 @@ const Player = memo((props) => {
 
   const audioRef = useRef();
   const playerRef = useRef();
-  const listRef = useRef();
 
+  // 
+  const setPlay2 = useCallback(() => {
+    if (!play) setplay()
+  }, [setplay])
 
   useEffect(() => {
     if (src) {
       audioRef.current.src = src;
       audioRef.current.autoplay = true;
       audioRef.current.loop = true 
-      if (!play) setplay()
+      setPlay2()
     }
   }, [src]);
 
+  
   // 播放暂停？
   useEffect(() => {
     if (audioRef.current) {
@@ -60,7 +61,7 @@ const Player = memo((props) => {
     }
     playerRef.current = true
     
-  }, [play]);
+  }, [play, openPlayer]);
 
   // 声音
   useEffect(() => {

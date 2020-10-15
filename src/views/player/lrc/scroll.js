@@ -5,22 +5,19 @@ import Scroll from '@/common/scroll'
 function LrcScroll (props){
   const {yy, currentLineNum} = props
 
-  const wrapRef = useRef();
-  const indexRef = useRef(-1);
-  const usescollRef = useRef();
   const lyricLineRef = useRef([]);
 
   const [lineEl, setLineEl] = useState()
 
-  const goNext = (max) => {
+  const goNext = useCallback((max) => {
     if ( currentLineNum < 5 ||  currentLineNum >= max) return;
     let lineEl = lyricLineRef.current[currentLineNum-5].current;
     setLineEl(lineEl)
-  };
+  }, [currentLineNum]);
 
   useEffect(() => {
     goNext(yy.length)
-  }, [currentLineNum, goNext]);
+  }, [currentLineNum, yy, goNext]);
 
   return (
     <Scroll lineEl={lineEl}>

@@ -4,11 +4,6 @@ import Search from '@/views/search/index'
 import SingerDetail from '@/views/singerDetail/index'
 const routes = [
   {
-    path:'/',
-    component: Header,
-    exact:true
-  },
-  {
     path:'/detail',
     component: Detail,
     exact:true
@@ -19,9 +14,14 @@ const routes = [
     exact:true
   },
   {
-    path:'/singerDetail',
-    component: SingerDetail,
-    exact:true
-  }
+    path:'/',
+    component: Header,
+    routes: [
+      {
+        path: "/singerDetail/:id",
+        component: SingerDetail,
+      }
+    ]
+  },
 ]
 export {routes}

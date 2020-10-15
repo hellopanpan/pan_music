@@ -31,7 +31,7 @@ function Header (props){
       setSongList((res.playlist && res.playlist.tracks) || []);
       setPlaylist(res.playlist);
     })
-  },[])
+  },[props.history])
   return (
     <CSSTransition timeout={1000}>
       <Wraper>
