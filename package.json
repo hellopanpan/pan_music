@@ -155,5 +155,6 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3300"
+  "proxy": "http://localhost:3300",
+  "homePage": "/pan_music/build/"
 }
