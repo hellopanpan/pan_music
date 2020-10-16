@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.60166edb.chunk.css",
-    "main.js": "/static/js/main.853b61f7.chunk.js",
-    "main.js.map": "/static/js/main.853b61f7.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.0290e046.js",
-    "runtime-main.js.map": "/static/js/runtime-main.0290e046.js.map",
-    "static/css/2.35fcc229.chunk.css": "/static/css/2.35fcc229.chunk.css",
-    "static/js/2.7d50724b.chunk.js": "/static/js/2.7d50724b.chunk.js",
-    "static/js/2.7d50724b.chunk.js.map": "/static/js/2.7d50724b.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.09f7b2e7229a418de322fc2a06d65d46.js": "/precache-manifest.09f7b2e7229a418de322fc2a06d65d46.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.35fcc229.chunk.css.map": "/static/css/2.35fcc229.chunk.css.map",
-    "static/css/main.60166edb.chunk.css.map": "/static/css/main.60166edb.chunk.css.map",
-    "static/js/2.7d50724b.chunk.js.LICENSE": "/static/js/2.7d50724b.chunk.js.LICENSE",
-    "static/media/iconfont.css": "/static/media/iconfont.da15fc11.eot"
+    "main.css": "/pan_music/build/static/css/main.779cd7e3.chunk.css",
+    "main.js": "/pan_music/build/static/js/main.8bd89dd9.chunk.js",
+    "main.js.map": "/pan_music/build/static/js/main.8bd89dd9.chunk.js.map",
+    "runtime-main.js": "/pan_music/build/static/js/runtime-main.f7303fbf.js",
+    "runtime-main.js.map": "/pan_music/build/static/js/runtime-main.f7303fbf.js.map",
+    "static/css/2.35fcc229.chunk.css": "/pan_music/build/static/css/2.35fcc229.chunk.css",
+    "static/js/2.3203ed2b.chunk.js": "/pan_music/build/static/js/2.3203ed2b.chunk.js",
+    "static/js/2.3203ed2b.chunk.js.map": "/pan_music/build/static/js/2.3203ed2b.chunk.js.map",
+    "index.html": "/pan_music/build/index.html",
+    "precache-manifest.d1cb0b1a6f580285870c1d53b5d562c8.js": "/pan_music/build/precache-manifest.d1cb0b1a6f580285870c1d53b5d562c8.js",
+    "service-worker.js": "/pan_music/build/service-worker.js",
+    "static/css/2.35fcc229.chunk.css.map": "/pan_music/build/static/css/2.35fcc229.chunk.css.map",
+    "static/css/main.779cd7e3.chunk.css.map": "/pan_music/build/static/css/main.779cd7e3.chunk.css.map",
+    "static/js/2.3203ed2b.chunk.js.LICENSE": "/pan_music/build/static/js/2.3203ed2b.chunk.js.LICENSE",
+    "static/media/iconfont.css": "/pan_music/build/static/media/iconfont.da15fc11.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.0290e046.js",
+    "static/js/runtime-main.f7303fbf.js",
     "static/css/2.35fcc229.chunk.css",
-    "static/js/2.7d50724b.chunk.js",
-    "static/css/main.60166edb.chunk.css",
-    "static/js/main.853b61f7.chunk.js"
+    "static/js/2.3203ed2b.chunk.js",
+    "static/css/main.779cd7e3.chunk.css",
+    "static/js/main.8bd89dd9.chunk.js"
   ]
 }
