@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "http://xpanpan.com/static/css/main.abc6fb63.chunk.css",
+    "main.js": "http://xpanpan.com/static/js/main.b0ed5c93.chunk.js",
+    "main.js.map": "http://xpanpan.com/static/js/main.b0ed5c93.chunk.js.map",
+    "runtime-main.js": "http://xpanpan.com/static/js/runtime-main.5dc0c8e5.js",
+    "runtime-main.js.map": "http://xpanpan.com/static/js/runtime-main.5dc0c8e5.js.map",
+    "static/css/2.35fcc229.chunk.css": "http://xpanpan.com/static/css/2.35fcc229.chunk.css",
+    "static/js/2.912dbd3a.chunk.js": "http://xpanpan.com/static/js/2.912dbd3a.chunk.js",
+    "static/js/2.912dbd3a.chunk.js.map": "http://xpanpan.com/static/js/2.912dbd3a.chunk.js.map",
+    "index.html": "http://xpanpan.com/index.html",
+    "precache-manifest.1b5a7b611e62c3fdaf30f5552cccee82.js": "http://xpanpan.com/precache-manifest.1b5a7b611e62c3fdaf30f5552cccee82.js",
+    "service-worker.js": "http://xpanpan.com/service-worker.js",
+    "static/css/2.35fcc229.chunk.css.map": "http://xpanpan.com/static/css/2.35fcc229.chunk.css.map",
+    "static/css/main.abc6fb63.chunk.css.map": "http://xpanpan.com/static/css/main.abc6fb63.chunk.css.map",
+    "static/js/2.912dbd3a.chunk.js.LICENSE": "http://xpanpan.com/static/js/2.912dbd3a.chunk.js.LICENSE",
+    "static/media/iconfont.css": "http://xpanpan.com/static/media/iconfont.da15fc11.eot"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5dc0c8e5.js",
+    "static/css/2.35fcc229.chunk.css",
+    "static/js/2.912dbd3a.chunk.js",
+    "static/css/main.abc6fb63.chunk.css",
+    "static/js/main.b0ed5c93.chunk.js"
+  ]
+}
