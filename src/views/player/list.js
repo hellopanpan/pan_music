@@ -63,6 +63,7 @@ const PlayerList = (props) => {
     let distance2 = e.nativeEvent.touches[0].pageY - start
     setDistance(distance2);
     console.log(distance2);
+    if (distance2 < 0) return
     moveRef.current.style['transition'] = `all 0s`
     moveRef.current.style['transform'] = `translate(0, ${distance}px)`
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Globalstyle} from './style.js';
-import { Icon } from '@/statics/icon-font/iconfont'
+import '@/statics/icon-font/iconfont.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from '@/store';
@@ -12,7 +12,6 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
     <Globalstyle /> 
-    <Icon />
   </Provider>,
 document.getElementById('root'));
 // document.getElementsByTagName('html')[0].style.fontSize = (document.documentElement.clientWidth || document.body.clientWidth) /10 + 'px';

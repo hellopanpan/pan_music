@@ -1,0 +1,16 @@
+{
+  "id": "2134675",
+  "name": "react",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2206528",
+      "name": "icon-music-note",
+      "font_class": "music-note",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}

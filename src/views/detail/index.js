@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
@@ -18,10 +18,13 @@ import {
 
 import GoBack from '@/common/goBack/index'
 import Scroll from '@/common/scroll'
+import MusicStart from '@/common/musicStart'
 
 function Header (props){
 
-  let { openMusic, openPlayer } = props
+  let { openMusic, openPlayer} = props
+  let { showMini, playerinfo } = props
+  const musicRef = useRef()
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState({});
 
@@ -32,6 +35,15 @@ function Header (props){
       setPlaylist(res.playlist);
     })
   },[props.history])
+
+
+  const openMusicWrap = (e, item, songList) => {
+    if (item.id == playerinfo.id) return
+    console.log(e)
+    openMusic(item, songList)
+    musicRef.current.getPositon(e.nativeEvent.clientX, e.nativeEvent.clientY, showMini)
+  };
+
   return (
     <CSSTransition timeout={1000}>
       <Wraper>
@@ -54,7 +66,7 @@ function Header (props){
                 {
                   songList.map( (item, index) => {
                     return (
-                      <PlayListItem key={index} onClick={()=> {openMusic.call(this, item, songList)}}>
+                      <PlayListItem key={index} onClick={(e)=> {openMusicWrap(e, item, songList)}}>
                         <div className="num">{index + 1}</div>
                         <div className="right">
                           <div className="title">{item.name}</div>
@@ -68,12 +80,15 @@ function Header (props){
             </Scroll>
         </PlayList>
         {openPlayer ? <NoPlayer></NoPlayer> : null }
+        <MusicStart ref={musicRef}></MusicStart>
       </Wraper>
     </CSSTransition>
   ); 
 };
 const mapStateToProps = (state) => {
   return {
+    playerinfo: state.getIn(['player', 'playerinfo']),
+    showMini: state.getIn(['player', 'showMini']),
     openPlayer: state.getIn(['player', 'openPlayer']),
     focused: state.getIn(['header', 'focused']),
     banner: state.getIn(['header', 'banner']),

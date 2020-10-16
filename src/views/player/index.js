@@ -24,7 +24,6 @@ import {
 
 import Lrc from './lrc'
 import PlyerList from './list'
-import { useCallback } from 'react';
 
 const Player = memo((props) => {
   let { play, volume, src, player2, playList, showMini , circle} = props;
@@ -37,19 +36,14 @@ const Player = memo((props) => {
   const audioRef = useRef();
   const playerRef = useRef();
 
-  // 
-  const setPlay2 = useCallback(() => {
-    if (!play) setplay()
-  }, [setplay])
-
   useEffect(() => {
     if (src) {
       audioRef.current.src = src;
       audioRef.current.autoplay = true;
       audioRef.current.loop = true 
-      setPlay2()
+      if (!play) setplay()
     }
-  }, [src]);
+  }, [src, setplay]);
 
   
   // 播放暂停？

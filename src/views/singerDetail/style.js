@@ -3,12 +3,12 @@ import styled from 'styled-components'
 export const Wraper = styled.div`
   height: 100vh;
   width: 100%;
-  background: #777;
+  background: #fff;
   position: absolute;
   top: 0;
   left: 0;
   transform-origin: right bottom;
-  transition: all .3s ease;
+  transition: transform .3s cubic-bezier(0.25,0.1,0.25,1);
   z-index: 3000;
   &.singer-enter, &.singer-appear {
     transform: rotateZ(40deg) translate3d(100%, 0, 0);
