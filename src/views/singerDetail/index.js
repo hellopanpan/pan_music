@@ -6,6 +6,7 @@ import * as api from '@/api'
 import GoBack from '@/common/goBack/index'
 import { CSSTransition } from "react-transition-group";
 
+
 // 图标
 import {
   PlusOutlined, 
@@ -19,8 +20,8 @@ import {
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 
 function SingerDetail (props){
-  const {openMusic, playAllMusicList, history} = props
-  const {openPlayer} = props
+  const {openMusic, playAllMusicList, history, setXY} = props
+  const {openPlayer, showMini, playerinfo} = props
 
   const [hotSongs, setHotSongs]= useState([])
   const [artist, setArtist]= useState({})
@@ -30,6 +31,7 @@ function SingerDetail (props){
   const wrapRef = useRef()
   const picRef = useRef()
   const imgRef = useRef()
+
 
   useEffect(() => {
     let params = {
@@ -47,6 +49,13 @@ function SingerDetail (props){
     if (list.legnth === 0) return
     openMusic(list[0])
     playAllMusicList(list)
+  } 
+
+  //播放
+  const openMusicWrap = (e, item) => {
+    if (item.id == playerinfo.id) return
+    openMusic(item)
+    setXY(e.nativeEvent.clientX, e.nativeEvent.clientY)
   } 
 
   // 滚动
@@ -109,7 +118,7 @@ function SingerDetail (props){
               {
                 hotSongs.map((item, index) => {
                   return(
-                    <div className="list-item" key={index} onClick={() => {openMusic(item)}}>
+                    <div className="list-item" key={index} onClick={(e) => {openMusicWrap(e, item)}}>
                       <div className="num">{index + 1}</div>
                       <div className="right">
                         <div className="name">{item.name}</div>
@@ -121,7 +130,6 @@ function SingerDetail (props){
               }
             </div>
           </div>
-          
         </div>
       </Wraper>
     </CSSTransition>
@@ -131,6 +139,8 @@ function SingerDetail (props){
 const mapStateToProps = (state) => {
   return {
     openPlayer: state.getIn(['player', 'openPlayer']),
+    playerinfo: state.getIn(['player', 'playerinfo']),
+    showMini: state.getIn(['player', 'showMini']),
   };
 };
 
@@ -148,6 +158,10 @@ const mapDispatchToProps = (dispatch) => {
       })
       const action3 = actionsCreatorsPlayer.setPlaylist(list)
       dispatch(action3)
+    },
+    setXY(x, y) {
+      const action = actionsCreatorsPlayer.setXY({x, y})
+      dispatch(action)
     },
     openMusic(item) {
       let info = {

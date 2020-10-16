@@ -11,7 +11,8 @@ import {
   TOGGLE_CIRCLE,
   PUSH_LIST,
   OPEN_PLAYER,
-  SET_LOADING
+  SET_LOADING,
+  SET_XY
 } from './actionType'
 
 import * as api from '@/api'
@@ -29,6 +30,10 @@ export const setLoading = (value) => ({
 export const setSrc = (src) => ({
   type: SET_SRC,
   value: src
+});
+export const setXY = (xy) => ({
+  type: SET_XY,
+  value: xy
 });
 export const setlrc = (src) => ({
   type: SET_LRC,

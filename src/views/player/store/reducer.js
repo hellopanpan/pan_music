@@ -1,4 +1,4 @@
-import { SET_PLAY,SET_LOADING, SET_SRC, SET_VOLUME, SET_LRC, SET_CURRENT, SET_PLAYER, SET_LIST, TOGGlE_MINI, SET_REMOVE, TOGGLE_CIRCLE, PUSH_LIST, OPEN_PLAYER } from './actionType'
+import { SET_PLAY,SET_LOADING, SET_SRC, SET_VOLUME, SET_LRC, SET_CURRENT, SET_PLAYER, SET_LIST, SET_XY, TOGGlE_MINI, SET_REMOVE, TOGGLE_CIRCLE, PUSH_LIST, OPEN_PLAYER } from './actionType'
 // immutable 库
 import { fromJS} from 'immutable'
 const defaultState = fromJS({
@@ -8,8 +8,9 @@ const defaultState = fromJS({
   lrc: '',
   current: 0,
   playerinfo: {},
+  xy: {},
   playList: [],
-  showMini: false,
+  showMini: true,
   openPlayer: false,
   circle: false,
   loading: false
@@ -26,6 +27,9 @@ export default (state = defaultState, action) => {
   }
   if (action.type === SET_SRC) {
     return state.set('src', action.value)
+  }
+  if (action.type === SET_XY) {
+    return state.set('xy', action.value)
   }
   if (action.type === SET_LRC) {
     return state.set('lrc', action.value)

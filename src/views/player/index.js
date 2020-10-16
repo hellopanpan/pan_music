@@ -2,6 +2,7 @@ import React, { useState, useEffect, memo, useRef} from 'react';
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
+import MusicStart from '@/common/musicStart'
 
 import { Slider } from 'antd';
 // 图标
@@ -26,7 +27,7 @@ import Lrc from './lrc'
 import PlyerList from './list'
 
 const Player = memo((props) => {
-  let { play, volume, src, player2, playList, showMini , circle} = props;
+  let { play, volume, src, player2, playList, showMini , circle, xy} = props;
   let { setplay, setCurrenttimestate, toggleMini, goNext, toggleCircle, openPlayer} = props;
 
   const [duration, setDuration] = useState(0)
@@ -35,18 +36,25 @@ const Player = memo((props) => {
 
   const audioRef = useRef();
   const playerRef = useRef();
+  const musicRef = useRef();
 
+  // 切换歌曲
   useEffect(() => {
     if (src) {
       audioRef.current.src = src;
       audioRef.current.autoplay = true;
       audioRef.current.loop = true 
       if (!play) setplay()
+      // if (showMini && musicRef.current) musicRef.current.getPositon(xy.x, xy.y, showMini)
     }
   }, [src, setplay]);
 
-  
-  // 播放暂停？
+  // 动画
+  useEffect(() => {
+    if (xy.x && xy.y && showMini && musicRef.current) musicRef.current.getPositon(xy.x, xy.y, showMini)
+  }, [xy]);
+
+  // 播放暂停切换
   useEffect(() => {
     if (audioRef.current) {
       if (play) audioRef.current.play();
@@ -54,7 +62,6 @@ const Player = memo((props) => {
       openPlayer()
     }
     playerRef.current = true
-    
   }, [play, openPlayer]);
 
   // 声音
@@ -141,26 +148,33 @@ const Player = memo((props) => {
   )
 
   // 播放器主体
-  let playerRender = (
-    <AudioWrap>
-      <audio 
-        className="audio"
-        controls="controls"
-        onTimeUpdate={updateTime}
-        ref={audioRef}
-      ></audio>
-      <CSSTransition timeout={1000}>
-        {showMini? mini: normal}
-      </CSSTransition>
-      {showListflag ? list : null}
-    </AudioWrap>
+  return (
+    <div>
+      {
+        playerRef.current ? 
+          <AudioWrap>
+            <audio 
+              className="audio"
+              controls="controls"
+              onTimeUpdate={updateTime}
+              ref={audioRef}
+            ></audio>
+            <CSSTransition timeout={1000}>
+              {showMini? mini: normal}
+            </CSSTransition>
+            {showListflag ? list : null}
+          </AudioWrap>
+        : null
+      }
+      {/* 动画 */}
+      <MusicStart ref={musicRef}></MusicStart>
+    </div>
   )
-
-  return playerRef.current ? playerRender : null
 });
 const mapStateToProps = (state) => {
   return {
     play: state.getIn(['player', 'play']),
+    xy: state.getIn(['player', 'xy']),
     volume: state.getIn(['player', 'volume']),
     src: state.getIn(['player', 'src']),
     current: state.getIn(['player', 'current']),

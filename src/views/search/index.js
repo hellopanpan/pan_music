@@ -82,7 +82,7 @@ function Header (props){
           {
             songs.map((item, index) => {
               return (
-                <div key={index} className="list-item" onClick={()=> {openMusic(item)}}>
+                <div key={index} className="list-item" onClick={(e)=> {openMusic(e, item)}}>
                   <div className="title">{item.name}</div>
                   <div>{item.artists && item.artists[0].name} - {item.album && item.album.name}</div>
                 </div>
@@ -106,7 +106,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    openMusic(item) {
+    openMusic(e, item) {
       let info = {
         title: item.name,
         singer: item.artists && item.artists[0].name,
@@ -118,9 +118,11 @@ const mapDispatchToProps = (dispatch) => {
       const action = actionsCreatorsPlayer.getSrc(item.id)
       const action2 = actionsCreatorsPlayer.setCurrentPlayer(info)
       const action3 = actionsCreatorsPlayer.pushPlaylist(info)
+      const action4 = actionsCreatorsPlayer.setXY({x: e.nativeEvent.clientX, y: e.nativeEvent.clientY})
       dispatch(action)
       dispatch(action2)
       dispatch(action3)
+      dispatch(action4)
     },
   };
 };

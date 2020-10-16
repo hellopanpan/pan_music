@@ -16,6 +16,7 @@ export const IPlayer = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  z-index: 88888999;
   padding: 0 20px;
   .pic{
     height: 60px;
