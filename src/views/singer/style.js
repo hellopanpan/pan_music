@@ -18,13 +18,16 @@ export const SingerList  = styled.div`
     overflow: hidden;
     background: #eee;
   }
+  
   .list {
     height: auto;
     padding: 10px;
+    line-height: 50px;
     border-bottom: 1px solid #efefef;
     img{
       height: 50px;
       width: 50px;
+      
     }
     span{
       margin-left: 10px;

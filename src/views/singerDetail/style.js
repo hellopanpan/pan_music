@@ -79,7 +79,7 @@ export const Wraper = styled.div`
     }
     .list{
       .list-item{
-        height: 50px;
+        height: 56px;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -90,7 +90,8 @@ export const Wraper = styled.div`
         }
         .name{
           font-size: 14px;
-          font-weight: 600;  
+          font-weight: 600;
+          line-height: 25px; 
         }
       }
     }

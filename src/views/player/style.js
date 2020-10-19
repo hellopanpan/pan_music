@@ -82,14 +82,17 @@ export const Nplayer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1rem;
+    padding: 1rem 1rem 0.3rem 1rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
   
   .audio{
     display:none;
   }
   .lrc-cont{
+    flex: 1;
     height: 400px;
   }
   .progress{

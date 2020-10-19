@@ -29,8 +29,10 @@ function Header (props){
   const [playlist, setPlaylist] = useState({});
 
   useEffect(() => {
-    if (!props.history.location.state) return
-    getPlaylistDetail({id: (props.history.location.state && props.history.location.state.id) || '5007828838'}).then(res => {
+    let getstate = props.history.location.state || localStorage.getItem('state-id')
+    if (!getstate) return
+    localStorage.setItem('state-id', props.history.location.state)
+    getPlaylistDetail({id: (getstate && getstate.id) || '5007828838'}).then(res => {
       setSongList((res.playlist && res.playlist.tracks) || []);
       setPlaylist(res.playlist);
     })

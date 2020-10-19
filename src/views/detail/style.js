@@ -67,7 +67,7 @@ export const PlayList = styled.div`
 export const PlayListItem = styled.div`
   height: auto;
   width: 100%;
-  height: 60px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,19 +76,22 @@ export const PlayListItem = styled.div`
   .num{
     width: 60px;
     text-align: center;
-    color: #2E3030;
+    color: #999;
     font-size: 24px;
   }
   .right{
     flex: 1;
     border-bottom: 1px solid #e4e4e4;
     .title{
-      color: #2E3030;
-      font-size: 100%
+      color: #666;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 25px;
     }
     .discribe{
       font-size: 12px;
-      color: #bba8a8;
+      color: #999;
+      line-height: 28px;
     }
   }
 `;

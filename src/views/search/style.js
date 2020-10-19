@@ -67,7 +67,7 @@ export const SearList = styled.div`
   flex: 1;
   padding: 10px 0px 20px 30px;
   .list-item{
-    height: 50px;
+    height: 60px;
     margin: 2px 0;
     cursor: pointer;
     .title{
@@ -78,6 +78,7 @@ export const SearList = styled.div`
       text-overflow: ellipsis;
       overflow: hidden;
       word-break: break-all;
+      line-height: 30px;
     }
   }
 `;

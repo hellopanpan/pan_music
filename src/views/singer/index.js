@@ -23,6 +23,7 @@ function Singer (props){
   const dataRef = useRef();
   const pageRef = useRef(0);
   const categoryRef = useRef('');
+  const cateMoreRef = useRef({});
   const initialRef = useRef('');
 
 
@@ -31,7 +32,8 @@ function Singer (props){
     let params = {
       offset: pageRef.current,
       initial: initialRef.current,
-      cat: categoryRef.current
+      type: cateMoreRef.current.type,
+      area: cateMoreRef.current.area
     }
     if (pageRef.current > 100) return
     let ajaxObj  = {}
@@ -56,6 +58,7 @@ function Singer (props){
     console.log(item)
     if(categoryRef.current === item.key) return;
     categoryRef.current = item.key;
+    cateMoreRef.current = item.more || {};
     pageRef.current = 0;
     getArtists()
   }
