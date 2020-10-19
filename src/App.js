@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter} from "react-router-dom";
+import { HashRouter} from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import {routes} from './router/index'
 import Player from '@/views/player'
@@ -15,9 +15,9 @@ function App(props) {
     <div className="App">
       { loading? <Spin className="loading-icon" size="large"></Spin>: null }
       <div className="app-wrap">  
-        <BrowserRouter>
+        <HashRouter>
           {renderRoutes(routes)}
-        </BrowserRouter>
+        </HashRouter>
       </div>
       <div className="player-wrap-all">
         <Player></Player>
