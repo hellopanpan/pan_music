@@ -1,35 +1,25 @@
-import React, { lazy, Suspense } from "react";
-const Header = lazy(() => import(/* webpackChunkName: "Header" */ '@/views/header/index')); 
-const Detail = lazy(() => import(/* webpackChunkName: "Detail" */ '@/views/detail/index'));  
-const Search = lazy(() => import(/* webpackChunkName: "Search" */ '@/views/search/index'));   
-const SingerDetail = lazy(() => import(/* webpackChunkName: "SingerDetail" */ '@/views/singerDetail/index'));   
-
-const SuspenseComponent = Component => props => {
-  return (
-    <Suspense fallback={null}>
-      <Component {...props}></Component>
-    </Suspense>
-  )
-}
-
+import Header from '@/views/header/index'
+import Detail from '@/views/detail/index'
+import Search from '@/views/search/index'
+import SingerDetail from '@/views/singerDetail/index'
 const routes = [
   {
     path:'/detail',
-    component: SuspenseComponent(Detail),
+    component: Detail,
     exact:true
   },
   {
     path:'/search',
-    component: SuspenseComponent(Search),
+    component: Search,
     exact:true
   },
   {
     path:'/',
-    component: SuspenseComponent(Header),
+    component: Header,
     routes: [
       {
         path: "/singerDetail/:id",
-        component: SuspenseComponent(SingerDetail),
+        component: SingerDetail,
       }
     ]
   },
