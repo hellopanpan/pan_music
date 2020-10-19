@@ -10,7 +10,7 @@ const defaultState = fromJS({
   playerinfo: {},
   xy: {},
   playList: [],
-  showMini: true,
+  showMini: false,
   openPlayer: false,
   circle: false,
   loading: false

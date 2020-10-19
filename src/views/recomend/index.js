@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 // import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
+import LazyLoad, {forceCheck}from 'react-lazyload';
 import { actionsCreators as actionsCreatorsPlayer } from '@/views/player/store'
 
 import { Carousel } from 'antd';
@@ -50,7 +51,7 @@ function Header (props){
   }
 
   return (
-    <Scroll>
+    <Scroll handleScroll = {forceCheck} >
       <HeaderWraper>
         <SlideWrap>
           <div className="bg-img"></div>
@@ -71,7 +72,9 @@ function Header (props){
                   <CustomerServiceOutlined />
                   <span className="con">{getW(item.playCount)}</span>
                 </div>
-                <img src={item.picUrl} alt=""/>
+                <LazyLoad height={200}>
+                  <img src={item.picUrl && item.picUrl + '?param=300x300'} alt=""/>
+                </LazyLoad>
                 <div className="dis">
                   {item.name}
                 </div>

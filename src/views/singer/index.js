@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import BScroll from 'better-scroll'
 import * as api from '@/api'
 import { renderRoutes } from 'react-router-config';
+import LazyLoad, {forceCheck}from 'react-lazyload';
 
 import { 
   SingerWraper,
@@ -88,6 +89,9 @@ function Singer (props){
         usescollRef.current.finishPullUp()
       }, 3000)
     })
+    usescollRef.current.on('scroll', () => {
+      forceCheck()
+    })
   }, [getArtists]);
 
   useEffect(() => {
@@ -115,14 +119,15 @@ function Singer (props){
               artists.map((item, index) => {
                 return (
                   <div className="list" key={index} onClick={() => {goSingerDetail(item)}}>
-                    <img src={item.picUrl + '?param=100x100'} alt=""/>
+                    <LazyLoad >
+                      <img src={item.picUrl + '?param=100x100'} alt=""/>
+                    </LazyLoad>
                     <span>{ item.name }</span>
                   </div>
                 )
               })
             }
           </div>
-          
         </div>
       </SingerList>
     </SingerWraper>

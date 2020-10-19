@@ -11,7 +11,8 @@ export const SingerWraper = styled.div`
 export const SingerList  = styled.div`
   width: 100%; 
   background: green;
-  height: 90vh;
+  height: 80vh;
+  flex: 1;
   .wraper{
     height: 100%;
     width: 100%;

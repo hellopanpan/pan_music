@@ -41,7 +41,7 @@ function TopList (props){
                 list.slice(0, 4).map((item, index) => {
                   return(
                     <div className="item" key={index} onClick={ () => goSingerDetail(item)}>
-                      <img src={item.coverImgUrl ? item.coverImgUrl + '?param=100x100' : null} alt=""/>
+                      <img src={item.coverImgUrl ? item.coverImgUrl + '?param=200x200' : null} alt=""/>
                       <div className="right">
                         {
                           item.tracks && item.tracks.map((item2, index2) => {
@@ -64,7 +64,7 @@ function TopList (props){
                 list.slice(4).map((item, index) => {
                   return(
                     <div className="item" key={index} onClick={ () => goSingerDetail(item)}>
-                      <img src={item.coverImgUrl ? item.coverImgUrl + '?param=100x100': null} alt=""/>
+                      <img src={item.coverImgUrl ? item.coverImgUrl + '?param=200x200': null} alt=""/>
                     </div>
                   )
                 })
