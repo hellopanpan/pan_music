@@ -35,7 +35,6 @@
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.5",
-    "http-proxy-middleware": "^1.0.3",
     "identity-obj-proxy": "3.0.0",
     "immutable": "^4.0.0-rc.12",
     "jest": "24.9.0",
@@ -155,6 +154,8 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:3300",
-  "homePage": "/pan_music/build/"
+  "homePage": "/pan_music/build/",
+  "devDependencies": {
+    "http-proxy-middleware": "^1.0.6"
+  }
 }

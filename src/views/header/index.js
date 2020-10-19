@@ -44,7 +44,7 @@ function Header (props){
 
   // 保留tab
   useEffect(() => {
-    let tab = localStorage.getItem('index-tab')
+    let tab = localStorage.getItem('index-tab') || 1
     if (!tab) return
     setCheck(parseInt(tab))
 
