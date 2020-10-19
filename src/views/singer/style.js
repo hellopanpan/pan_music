@@ -21,9 +21,11 @@ export const SingerList  = styled.div`
   
   .list {
     height: auto;
-    padding: 10px;
+    padding: 5px 10px;
     line-height: 50px;
     border-bottom: 1px solid #efefef;
+    display: flex;
+    flex-direction: row;
     img{
       height: 50px;
       width: 50px;
