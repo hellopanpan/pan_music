@@ -102,22 +102,36 @@ const Player = memo((props) => {
   let list = (
     <PlyerList playList={playList} goList={goList} showListflag={showListflag}></PlyerList>
   )
-
   // mini palyer
   let mini = (
-    <IPlayer>
-      {player2.pic ? <img src={ player2.pic + '?param=100x100' } className="pic" alt="" onClick={toggleMini} /> : null }
-      <div className="title-wrap" onClick={toggleMini}>
-        <div className="name">{player2.title}</div>
-        <div className="singer">{player2.singer}</div>
-      </div>
-      {icon}
-      <AlignRightOutlined onClick={(e) => {goList(true)}}/>
-    </IPlayer>
+    <CSSTransition
+      classNames="singer-mini"
+      in={showMini}
+      timeout={2000}
+      appear={true}
+      unmountOnExit
+    >
+      <IPlayer>
+        {player2.pic ? <img src={ player2.pic + '?param=100x100' } className={`pic play ${play? '': 'pause'}`} alt="" onClick={toggleMini} /> : null }
+        <div className="title-wrap" onClick={toggleMini}>
+          <div className="name">{player2.title}</div>
+          <div className="singer">{player2.singer}</div>
+        </div>
+        {icon}
+        <AlignRightOutlined onClick={(e) => {goList(true)}}/>
+      </IPlayer>
+    </CSSTransition>
   )
 
   //  大号音乐播放
   let normal = (
+    <CSSTransition
+      classNames="singer"
+      in={!showMini}
+      timeout={2000}
+      appear={true}
+      unmountOnExit
+    >
     <Nplayer >
       <div className="top">
         <DownOutlined onClick={toggleMini}/>
@@ -145,6 +159,7 @@ const Player = memo((props) => {
       </div>
       
     </Nplayer>
+    </CSSTransition>
   )
 
   // 播放器主体
@@ -159,9 +174,9 @@ const Player = memo((props) => {
               onTimeUpdate={updateTime}
               ref={audioRef}
             ></audio>
-            <CSSTransition timeout={1000}>
-              {showMini? mini: normal}
-            </CSSTransition>
+            
+            {normal}
+            {mini}
             {showListflag ? list : null}
           </AudioWrap>
         : null
