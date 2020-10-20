@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "66f6642481d39587b2ff53904a588c40",
+    "revision": "31c61bd066ab22c0ce1ac2aacaea85e9",
     "url": "/pan_music/build/index.html"
   },
   {
-    "revision": "72c72935407a3c660aba",
+    "revision": "8d39a6c03854276e1a0a",
     "url": "/pan_music/build/static/css/2.35fcc229.chunk.css"
   },
   {
-    "revision": "6ffb71a360d3d94ef568",
+    "revision": "928baa4751edf7f75ede",
     "url": "/pan_music/build/static/css/main.779cd7e3.chunk.css"
   },
   {
-    "revision": "72c72935407a3c660aba",
-    "url": "/pan_music/build/static/js/2.727e5c2e.chunk.js"
+    "revision": "8d39a6c03854276e1a0a",
+    "url": "/pan_music/build/static/js/2.9969f9fa.chunk.js"
   },
   {
     "revision": "72f445d4908265d5a816299099ad1499",
-    "url": "/pan_music/build/static/js/2.727e5c2e.chunk.js.LICENSE"
+    "url": "/pan_music/build/static/js/2.9969f9fa.chunk.js.LICENSE"
   },
   {
-    "revision": "6ffb71a360d3d94ef568",
-    "url": "/pan_music/build/static/js/main.fc22ea6a.chunk.js"
+    "revision": "928baa4751edf7f75ede",
+    "url": "/pan_music/build/static/js/main.0b51600a.chunk.js"
   },
   {
     "revision": "43452b45da0633436a7d",
