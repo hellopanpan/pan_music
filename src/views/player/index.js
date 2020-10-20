@@ -51,6 +51,7 @@ const Player = memo((props) => {
 
   // 动画
   useEffect(() => {
+    console.log('star-----' + showMini)
     if (xy.x && xy.y && showMini && musicRef.current) musicRef.current.getPositon(xy.x, xy.y, showMini)
   }, [xy]);
 

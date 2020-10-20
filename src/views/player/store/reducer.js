@@ -10,7 +10,7 @@ const defaultState = fromJS({
   playerinfo: {},
   xy: {},
   playList: [],
-  showMini: true,
+  showMini: false,
   openPlayer: false,
   circle: false,
   loading: false
@@ -65,13 +65,14 @@ export default (state = defaultState, action) => {
   }
   if (action.type === SET_REMOVE) {
     const list = state.get('playList')
-    let arr = []
+    let arr2 = []
     list.forEach(item => {
       if (action.value.id !== item.id) {
-        arr.push(item)
+        arr2.push(item)
       }
     })
-    return state.set('playList', arr)
+    console.log(arr2)
+    return state.set('playList', arr2)
   }
   return state;
 }

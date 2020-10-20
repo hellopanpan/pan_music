@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef, useCallback} from 'react';
 import { connect } from 'react-redux'
 import { actionsCreators } from './store'
 
@@ -34,10 +34,11 @@ const PlayerList = (props) => {
   }
 
   // 清除 放歌
-  const  goremoveSong =  (e, item, player2, playList) => {
+  const  goremoveSong = useCallback((e, item, player2, playList) => {
     e.stopPropagation();
+    console.log(2222)
     removeSong(item, player2, playList)
-  }
+  }, [removeSong]) 
 
   // show
   useEffect(() => {
@@ -93,7 +94,7 @@ const PlayerList = (props) => {
               {
                 playList.map(((item, index) => {
                   return (
-                    <div className="itemL" key={index} onClick={(e) => {goSong(e, item)}}>
+                    <div className="itemL" key={item.id} onClick={(e) => {goSong(e, item)}}>
                       <div className="playcon">
                         {player2.id === item.id ? <PlayCircleFilled /> : null}
                       </div>
@@ -125,12 +126,14 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(action2)
     },
     removeSong(item, player2, list) {
+      console.log('remove')
+      const action2 = actionsCreators.removeSong(item)
+      dispatch(action2)
       if ((item.id === player2.id) && list.length >= 2) {
         const action = actionsCreators.goNext(item.id, list, true)
         dispatch(action)
       }
-      const action = actionsCreators.removeSong(item)
-      dispatch(action)
+      
     },
   }
 }

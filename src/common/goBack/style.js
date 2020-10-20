@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const GoWraper = styled.div`
-  height: 0.8rem;
-  line-height: 0.8rem;
+  height: 46px;
+  line-height: 46px;
   width: 100%;
   padding: 0 20px;
   color: #fff;

@@ -37,13 +37,14 @@ export const Wraper = styled.div`
       height: 30px;
       line-height: 30px;
       position: absolute;
-      bottom: 10px;
+      bottom:30px;
       left: 50%;
       color: #fff;
       background: red;
       text-align: center;
       transform: translateX(-50%);
-      border-radius: 14px;  
+      border-radius: 14px;
+      font-weight: 600
     }
   }
   .scoll-wrap{

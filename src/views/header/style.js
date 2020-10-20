@@ -25,7 +25,6 @@ export const HeaderWraper = styled.div`
   background: #777;
 `;
 
-
 export const Nav = styled.div`
   height: 50px;
   width:100%;
@@ -43,6 +42,7 @@ export const Nav = styled.div`
   }
   .more{
     font-size: 18px;
+    opacity: 0;
   }
 `;
 export const NavTab = styled.div`
