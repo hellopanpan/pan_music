@@ -42,7 +42,6 @@ export const Nav = styled.div`
   }
   .more{
     font-size: 18px;
-    opacity: 0;
   }
 `;
 export const NavTab = styled.div`

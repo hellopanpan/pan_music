@@ -198,10 +198,10 @@ export const Nplayer = styled.div`
       margin: 0 0.5rem;
     }
     .cur{
-      width: 40px;
+      width: 50px;
     }
     .total{
-      width: 40px;
+      width: 50px;
     }
   }
   .ico{

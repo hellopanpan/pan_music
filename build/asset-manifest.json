@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pan_music/build/static/css/main.779cd7e3.chunk.css",
-    "main.js": "/pan_music/build/static/js/main.0b51600a.chunk.js",
-    "main.js.map": "/pan_music/build/static/js/main.0b51600a.chunk.js.map",
+    "main.js": "/pan_music/build/static/js/main.ad822794.chunk.js",
+    "main.js.map": "/pan_music/build/static/js/main.ad822794.chunk.js.map",
     "runtime-main.js": "/pan_music/build/static/js/runtime-main.f7303fbf.js",
     "runtime-main.js.map": "/pan_music/build/static/js/runtime-main.f7303fbf.js.map",
     "static/css/2.35fcc229.chunk.css": "/pan_music/build/static/css/2.35fcc229.chunk.css",
     "static/js/2.9969f9fa.chunk.js": "/pan_music/build/static/js/2.9969f9fa.chunk.js",
     "static/js/2.9969f9fa.chunk.js.map": "/pan_music/build/static/js/2.9969f9fa.chunk.js.map",
     "index.html": "/pan_music/build/index.html",
-    "precache-manifest.ffa62d51a78e3b315905f3e2084bb4cc.js": "/pan_music/build/precache-manifest.ffa62d51a78e3b315905f3e2084bb4cc.js",
+    "precache-manifest.97085ea968150ea8f50d477ed1704d3c.js": "/pan_music/build/precache-manifest.97085ea968150ea8f50d477ed1704d3c.js",
     "service-worker.js": "/pan_music/build/service-worker.js",
     "static/css/2.35fcc229.chunk.css.map": "/pan_music/build/static/css/2.35fcc229.chunk.css.map",
     "static/css/main.779cd7e3.chunk.css.map": "/pan_music/build/static/css/main.779cd7e3.chunk.css.map",
@@ -21,6 +21,6 @@
     "static/css/2.35fcc229.chunk.css",
     "static/js/2.9969f9fa.chunk.js",
     "static/css/main.779cd7e3.chunk.css",
-    "static/js/main.0b51600a.chunk.js"
+    "static/js/main.ad822794.chunk.js"
   ]
 }
