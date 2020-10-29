@@ -14,7 +14,8 @@ import {
   VerticalLeftOutlined,
   VerticalRightOutlined,
   SyncOutlined,
-  LoginOutlined
+  LoginOutlined,
+  ShrinkOutlined
 } from '@ant-design/icons';
 
 import { 
@@ -149,6 +150,7 @@ const Player = memo((props) => {
           <div className="total">{getSecondMin(duration)}</div>
         </div>
         <div className="button">
+          <ShrinkOutlined  onClick={toggleMini} />
           {
             circle ? <LoginOutlined onClick={toggleCircle}/> : <SyncOutlined onClick={toggleCircle}/>
           }
