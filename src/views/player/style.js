@@ -57,10 +57,14 @@ export const IPlayer = styled.div`
   z-index: 88888999;
   padding: 0 20px;
   &.singer-mini-enter, &.singer-mini-appear {
-    animation: ${rotate1} 1s cubic-bezier(0.25,0.1,0.25,1);
+    transform: translate3d(-260px, 500px, 0) scale(0);
+    opacity: 0;
   }
   &.singer-mini-enter-active, &.singer-mini-appear-active{
-    animation: ${rotate1} 0.6s cubic-bezier(0.25,0.1,0.25,1);
+    animation: ${rotate1} 0.6s cubic-bezier(0.25,0.1,0.25,1) forwards;
+    animation-delay:0.8s;
+    -webkit-animation-delay:0.8s; /* Safari 和 Chrome */
+    
   }
   &.singer-mini-exit{
     animation:  ${rotate2} 1s cubic-bezier(0.25,0.1,0.25,1) forwards;
@@ -121,9 +125,11 @@ export const Nplayer = styled.div`
   z-index:100000;
   &.singer-enter, &.singer-appear {
     animation: ${rotate1} 1s cubic-bezier(0.25,0.1,0.25,1);
+    animation-delay:0.5s;
+    -webkit-animation-delay:0.5s; /* Safari 和 Chrome */
     .button{
       transform: translate(0, 130px);
-      transition: transform 1s cubic-bezier(0.86, 0.18, 0.82, 1.32);;
+      transition: transform 0.2s cubic-bezier(0.86, 0.18, 0.82, 1.32);;
     }
   }
   &.singer-enter-active, &.singer-appear-active{
@@ -133,10 +139,11 @@ export const Nplayer = styled.div`
     }
   }
   &.singer-exit{
-    animation:  ${rotate2} 1s cubic-bezier(0.25,0.1,0.25,1) forwards;
+    animation:  ${rotate2} 0.8s cubic-bezier(0.25,0.1,0.25,1) forwards;
     opacity: 1;
     .button{
-      transform: translate(0, 0px);
+      transform: translate(0, 130px);
+      transition: transform 1s cubic-bezier(0.86, 0.18, 0.82, 1.32);;
     }
   }
   &.singer-exit-active{
