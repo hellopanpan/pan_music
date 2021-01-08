@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "146bfb642ab5c234186371973557ff5f",
+    "revision": "ad7078cf18a4446cce584075618f0960",
     "url": "/pan_music/build/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pan_music/build/static/css/2.35fcc229.chunk.css"
   },
   {
-    "revision": "73f703da54b6173c1442",
-    "url": "/pan_music/build/static/css/main.779cd7e3.chunk.css"
+    "revision": "91f3c4cf4e6d195ecac3",
+    "url": "/pan_music/build/static/css/main.20e44490.chunk.css"
   },
   {
     "revision": "6eddfbfe05a45b10fd3c",
@@ -32,8 +32,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pan_music/build/static/js/5.df34dc2f.chunk.js"
   },
   {
-    "revision": "c2679da4bc119f896a93",
-    "url": "/pan_music/build/static/js/6.4c02f6e2.chunk.js"
+    "revision": "3b2905901af8c77d764e",
+    "url": "/pan_music/build/static/js/6.0901a8fa.chunk.js"
   },
   {
     "revision": "4a3c94716d76ab26a5cc",
@@ -44,12 +44,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pan_music/build/static/js/8.28a32721.chunk.js"
   },
   {
-    "revision": "73f703da54b6173c1442",
+    "revision": "91f3c4cf4e6d195ecac3",
     "url": "/pan_music/build/static/js/main.d8b7d600.chunk.js"
   },
   {
-    "revision": "2fbbdcd9597e1f040de5",
-    "url": "/pan_music/build/static/js/runtime-main.f5259753.js"
+    "revision": "74239ccc1bdb01d81031",
+    "url": "/pan_music/build/static/js/runtime-main.92b84dff.js"
   },
   {
     "revision": "0ff7910e55b51afc729545a18a7365b9",

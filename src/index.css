@@ -7,7 +7,7 @@ body, .App{
   overflow: hidden;
 }
 html{
-  background-color: rgba(0, 128,0, 0.8);
+  background-color: rgba(0, 128,0, 0.5);
 }
 .loading-icon{
   position: fixed !important;
