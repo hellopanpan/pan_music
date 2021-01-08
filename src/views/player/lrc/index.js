@@ -52,9 +52,9 @@ function LRC (props, ref){
 }
 const mapStateToProps = (state) => {
   return {
-    lyric: state.getIn(['player', 'lrc']),
-    src: state.getIn(['player', 'src']),
-    current: state.getIn(['player', 'current']),
+    lyric: state.player.get('lrc'),
+    src: state.player.get('src'),
+    current: state.player.get('current'),
   };
 };
 

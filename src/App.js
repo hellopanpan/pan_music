@@ -27,7 +27,7 @@ function App(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    loading: state.getIn(['player', 'loading']),
+    loading: state.player.get('loading'),
   };
 };
 

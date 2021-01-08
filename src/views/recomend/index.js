@@ -89,8 +89,8 @@ function Header (props){
 };
 const mapStateToProps = (state) => {
   return {
-    banner: state.getIn(['recomend', 'banner']),
-    personal: state.getIn(['recomend', 'personal'])
+    banner: state.recomend.get('banner'),
+    personal: state.recomend.get('personal')
   };
 };
 

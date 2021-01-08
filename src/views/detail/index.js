@@ -89,12 +89,12 @@ function Header (props){
 };
 const mapStateToProps = (state) => {
   return {
-    playerinfo: state.getIn(['player', 'playerinfo']),
-    showMini: state.getIn(['player', 'showMini']),
-    openPlayer: state.getIn(['player', 'openPlayer']),
-    focused: state.getIn(['header', 'focused']),
-    banner: state.getIn(['header', 'banner']),
-    personal: state.getIn(['header', 'personal'])
+    playerinfo: state.player.get('playerinfo'),
+    showMini: state.player.get('showMini'),
+    openPlayer: state.player.get('openPlayer'),
+    focused: state.recomend.get('focused'),
+    banner: state.recomend.get('banner'),
+    personal: state.recomend.get('personal')
   };
 };
 

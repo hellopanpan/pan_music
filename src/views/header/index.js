@@ -78,7 +78,7 @@ function Header (props){
 };
 const mapStateToProps = (state) => {
   return {
-    openPlayer: state.getIn(['player', 'openPlayer']),
+    openPlayer: state.player.get('openPlayer'),
   };
 };
 

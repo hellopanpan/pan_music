@@ -138,9 +138,9 @@ function SingerDetail (props){
 
 const mapStateToProps = (state) => {
   return {
-    openPlayer: state.getIn(['player', 'openPlayer']),
-    playerinfo: state.getIn(['player', 'playerinfo']),
-    showMini: state.getIn(['player', 'showMini']),
+    openPlayer: state.player.get('openPlayer'),
+    playerinfo: state.player.get('playerinfo'),
+    showMini: state.player.get( 'showMini'),
   };
 };
 

@@ -114,7 +114,7 @@ const PlayerList = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    player2: state.getIn(['player', 'playerinfo']),
+    player2: state.player.get('playerinfo'),
   };
 };
 const mapDispatchToProps = (dispatch) => {

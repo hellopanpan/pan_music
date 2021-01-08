@@ -191,15 +191,15 @@ const Player = memo((props) => {
 });
 const mapStateToProps = (state) => {
   return {
-    play: state.getIn(['player', 'play']),
-    xy: state.getIn(['player', 'xy']),
-    volume: state.getIn(['player', 'volume']),
-    src: state.getIn(['player', 'src']),
-    current: state.getIn(['player', 'current']),
-    player2: state.getIn(['player', 'playerinfo']),
-    playList: state.getIn(['player', 'playList']),
-    showMini: state.getIn(['player', 'showMini']),
-    circle: state.getIn(['player', 'circle']),
+    play: state.player.get('play'),
+    xy: state.player.get('xy'),
+    volume: state.player.get('volume'),
+    src: state.player.get( 'src'),
+    current: state.player.get('current'),
+    player2: state.player.get('playerinfo'),
+    playList: state.player.get( 'playList'),
+    showMini: state.player.get('showMini'),
+    circle: state.player.get('circle'),
   };
 };
 
