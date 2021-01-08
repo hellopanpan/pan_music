@@ -10,7 +10,7 @@ export const Wraper = styled.div`
 export const NoPlayer = styled.div`
   height: 100px;
   width: 100%;
-  background: #444;
+  background: #fff;
 `;
 
 export const DetailHeader = styled.div`

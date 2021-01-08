@@ -6,6 +6,9 @@ body, .App{
   flex-direction: column;
   overflow: hidden;
 }
+html{
+  background-color: rgba(0, 128,0, 0.8);
+}
 .loading-icon{
   position: fixed !important;
   top: 50%;
